@@ -1,7 +1,6 @@
 import React from 'react';
 import { ImageToBlackAndWhiteIcon } from '../components/icons/ImageToBlackAndWhiteIcon';
-// FIX: Changed to a named import to get the correct base component.
-import { ImageFilterBasePage } from './ImageBlurFilterPage';
+import ImageFilterBasePage from './ImageBlurFilterPage';
 
 const ImageToBlackAndWhitePage: React.FC = () => (
     <ImageFilterBasePage

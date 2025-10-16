@@ -1,7 +1,6 @@
 import React from 'react';
 import { ImageHueShifterIcon } from '../components/icons/ImageHueShifterIcon';
-// FIX: Changed to a named import to get the correct base component.
-import { ImageFilterBasePage } from './ImageBlurFilterPage';
+import ImageFilterBasePage from './ImageBlurFilterPage';
 
 const ImageHueShifterPage: React.FC = () => (
     <ImageFilterBasePage

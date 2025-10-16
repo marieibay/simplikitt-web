@@ -1,7 +1,6 @@
 import React from 'react';
 import { ImageInvertColorsIcon } from '../components/icons/ImageInvertColorsIcon';
-// FIX: Changed to a named import to get the correct base component.
-import { ImageFilterBasePage } from './ImageBlurFilterPage'; 
+import ImageFilterBasePage from './ImageBlurFilterPage'; 
 
 const ImageInvertColorsPage: React.FC = () => (
     <ImageFilterBasePage

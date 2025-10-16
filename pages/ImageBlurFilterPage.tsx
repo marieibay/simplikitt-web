@@ -1,13 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ImageBlurFilterIcon } from '../components/icons/ImageBlurFilterIcon';
 
-// FIX: Export the base component so other pages can import it.
-// FIX: Expand filterName type to include all variants used across the app.
-export const ImageFilterBasePage: React.FC<{
+const ImageFilterBasePage: React.FC<{
     Icon: React.FC<any>;
     title: string;
     color: string;
-    filterName: 'blur' | 'sepia' | 'invert' | 'contrast' | 'opacity' | 'brightness' | 'grayscale' | 'hue-rotate';
+    filterName: 'blur' | 'sepia' | 'invert' | 'contrast';
     initialValue: number;
     min: number;
     max: number;
