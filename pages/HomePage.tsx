@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ToolCard } from '../components/ToolCard';
 import { TOOLS } from '../constants/tools';
@@ -75,13 +74,19 @@ const HomePage: React.FC = () => {
   }, {});
 
   return (
-    <div className="bg-slate-50">
-      <div className="container mx-auto px-4 py-12 md:py-20">
-        <section className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight">Explore Our Tools</h2>
-          <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Browse by category or scroll down to see all available utilities.</p>
-        </section>
-        
+    <div className="bg-gray-50">
+      <div className="bg-white border-b border-gray-200">
+        <div className="container mx-auto px-4 py-16 md:py-24 text-center">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 tracking-tight">
+            Instant, No-Cost Digital Tools
+          </h1>
+          <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+            Solve daily digital problems, fast. All tools are free, private, and run entirely in your browser.
+          </p>
+        </div>
+      </div>
+      
+      <div className="container mx-auto px-4 -mt-12">
         <section className="mb-16">
           <div className="flex flex-row flex-nowrap gap-4 md:gap-6 justify-center">
             {allCategories.map(name => {
@@ -101,7 +106,7 @@ const HomePage: React.FC = () => {
         </section>
       </div>
       
-      <div className="bg-white border-t border-slate-200">
+      <div className="bg-white border-t border-gray-100">
         <div className="container mx-auto px-4 py-12 md:py-20">
         {allCategories.map(categoryName => {
           const tools = groupedTools[categoryName];
