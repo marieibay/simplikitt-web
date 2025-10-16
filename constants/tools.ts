@@ -149,6 +149,21 @@ import ImageHeaderInfoViewerPage from '../pages/ImageHeaderInfoViewerPage';
 import ImageHistogramViewerPage from '../pages/ImageHistogramViewerPage';
 import ImageColorPaletteSaverPage from '../pages/ImageColorPaletteSaverPage';
 
+export const POPULAR_PATHS = [
+  '/image-resizer',
+  '/json-formatter',
+  '/word-counter',
+  '/image-converter',
+  '/case-converter',
+  '/timestamp-converter',
+  '/url-encoder-decoder',
+  '/percentage-calculator',
+  '/password-generator',
+  '/qr-code-generator',
+  '/duplicate-line-remover',
+  '/image-cropper',
+];
+
 
 export const TOOLS: Tool[] = [
   {

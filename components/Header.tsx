@@ -1,12 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SimpliKittLogo } from '../assets/SimpliKittLogo';
 import { TOOLS } from '../constants/tools';
 import { allCategories } from '../constants/categories';
 import { slugify } from '../utils/helpers';
 import { Tool } from '../types';
+import { useSearch } from '../contexts/SearchContext';
 
 export const Header: React.FC = () => {
+  const { searchQuery, setSearchQuery } = useSearch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    // Navigate to the all tools page if we're not already there
+    if (location.pathname !== '/tools') {
+      navigate('/tools');
+    }
+  };
+  
   const groupedTools = TOOLS.reduce<Record<string, Tool[]>>((acc, tool) => {
     const { category } = tool;
     if (!acc[category]) {
@@ -72,7 +85,12 @@ export const Header: React.FC = () => {
         {/* Right: Search */}
         <div className="flex items-center gap-2">
           <div className="relative hidden md:block">
-            <input type="search" placeholder="Search tools..." className="w-48 pl-10 pr-4 py-2 bg-gray-100 border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" />
+            <input 
+              type="search" 
+              placeholder="Search tools..." 
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className="w-48 pl-10 pr-4 py-2 bg-gray-100 border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" />
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-gray-400"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             </div>
