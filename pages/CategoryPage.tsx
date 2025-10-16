@@ -5,6 +5,15 @@ import { ToolCard } from '../components/ToolCard';
 import { categoryDetails, allCategories } from '../constants/categories';
 import { slugify } from '../utils/helpers';
 
+const categoryBgColors: { [key: string]: string } = {
+  orange: 'bg-orange-500',
+  blue: 'bg-blue-500',
+  green: 'bg-green-500',
+  purple: 'bg-violet-500',
+  teal: 'bg-cyan-400',
+  indigo: 'bg-blue-700',
+};
+
 const CategoryPage: React.FC = () => {
     const { categorySlug } = useParams<{ categorySlug: string }>();
 
@@ -24,13 +33,14 @@ const CategoryPage: React.FC = () => {
 
     const toolsForCategory = TOOLS.filter(tool => tool.category === categoryName);
     const details = categoryDetails[categoryName as keyof typeof categoryDetails];
+    const bgColor = categoryBgColors[details.colorName as keyof typeof categoryBgColors] || 'bg-gray-500';
 
     return (
         <div className="bg-white">
             <div className="container mx-auto px-4 py-12 md:py-16">
                 <section>
                     <div className="flex items-center gap-4 mb-8">
-                        <div className={`p-3 rounded-lg bg-gray-100`}>
+                        <div className={`p-3 rounded-lg ${bgColor}`}>
                              <details.Icon className="w-10 h-10" />
                         </div>
                         <div>
