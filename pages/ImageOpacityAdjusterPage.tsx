@@ -1,6 +1,7 @@
 import React from 'react';
 import { ImageOpacityAdjusterIcon } from '../components/icons/ImageOpacityAdjusterIcon';
-import ImageFilterBasePage from './ImageBlurFilterPage';
+// FIX: Changed to a named import since ImageFilterBasePage is now a named export.
+import { ImageFilterBasePage } from './ImageBlurFilterPage';
 
 const ImageOpacityAdjusterPage: React.FC = () => (
     <ImageFilterBasePage

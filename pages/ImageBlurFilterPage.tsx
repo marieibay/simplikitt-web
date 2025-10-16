@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ImageBlurFilterIcon } from '../components/icons/ImageBlurFilterIcon';
 
-const ImageFilterBasePage: React.FC<{
+// FIX: Export ImageFilterBasePage to be reusable in other filter pages
+// FIX: Widen the type for filterName to include all used filter types
+export const ImageFilterBasePage: React.FC<{
     Icon: React.FC<any>;
     title: string;
     color: string;
-    filterName: 'blur' | 'sepia' | 'invert' | 'contrast';
+    filterName: 'blur' | 'sepia' | 'invert' | 'contrast' | 'opacity' | 'brightness' | 'hue-rotate' | 'grayscale';
     initialValue: number;
     min: number;
     max: number;
@@ -87,7 +89,7 @@ const ImageFilterBasePage: React.FC<{
                         <h3 className="text-xl font-semibold mb-2">Controls</h3>
                         <div className="p-4 bg-white rounded-lg shadow-md border space-y-4">
                             <div>
-                                <label className="block font-medium capitalize">{filterName}: {filterValue}{unit}</label>
+                                <label className="block font-medium capitalize">{filterName.replace('-', ' ')}: {filterValue}{unit}</label>
                                 <input
                                     type="range"
                                     min={min}
