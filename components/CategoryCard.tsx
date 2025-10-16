@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 interface CategoryCardProps {
@@ -22,13 +23,13 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ title, description, 
   const selectedColor = colors[colorName as keyof typeof colors] || colors.blue;
 
   return (
-    <a href={href} className={`group block rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 ease-in-out ${selectedColor.bg}`}>
-      <div className="p-10 flex items-center justify-center">
-        <Icon className={`w-16 h-16 ${selectedColor.text}`} />
+    <a href={href} className={`group block flex-1 min-w-0 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out ${selectedColor.bg}`}>
+      <div className="p-6 flex items-center justify-center">
+        <Icon className={`w-12 h-12 ${selectedColor.text}`} />
       </div>
-      <div className="bg-slate-50 p-5 m-3 mb-4 -mt-2 rounded-xl border border-slate-200/80">
-        <h3 className="text-xl font-bold text-gray-900">{title}</h3>
-        <p className="mt-2 text-gray-600">{description}</p>
+      <div className="bg-slate-50 p-4 m-2 mb-3 -mt-2 rounded-xl border border-slate-200/80">
+        <h3 className="text-lg font-bold text-gray-900 leading-tight">{title}</h3>
+        <p className="mt-1 text-sm text-gray-600">{description}</p>
       </div>
     </a>
   );

@@ -9,4 +9,5 @@ export interface Tool {
   Page: FC;
   borderColor: string;
   category: string;
+  isPremium?: boolean;
 }

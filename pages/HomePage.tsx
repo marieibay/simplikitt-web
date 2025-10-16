@@ -55,9 +55,14 @@ const categoryDetails = {
   },
 };
 
-const topCategories = ['Image Tools', 'Text & List Tools', 'PDF & Document Tools'];
-const bottomCategories = ['File Converters & Utilities', 'Calculators & Time Tools', 'Web & Developer Tools'];
-const allCategories = [...topCategories, ...bottomCategories];
+const allCategories = [
+    'Image Tools', 
+    'Text & List Tools', 
+    'PDF & Document Tools', 
+    'File Converters & Utilities', 
+    'Calculators & Time Tools', 
+    'Web & Developer Tools'
+];
 
 const HomePage: React.FC = () => {
   const groupedTools = TOOLS.reduce<Record<string, Tool[]>>((acc, tool) => {
@@ -74,34 +79,12 @@ const HomePage: React.FC = () => {
       <div className="container mx-auto px-4 py-12 md:py-20">
         <section className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight">Explore Our Tools</h2>
+          <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Browse by category or scroll down to see all available utilities.</p>
         </section>
         
-        <section className="mb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {topCategories.map(name => {
-              const details = categoryDetails[name as keyof typeof categoryDetails];
-              return (
-                <CategoryCard 
-                  key={name}
-                  title={name}
-                  description={details.cardDescription}
-                  Icon={details.Icon}
-                  colorName={details.colorName}
-                  href={`#${slugify(name)}`}
-                />
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight">Our 300+ Client-Side Tools</h2>
-          <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Instant, No-Cost Utility for Everyone.</p>
-        </section>
-
-        <section className="mb-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {bottomCategories.map(name => {
+        <section className="mb-16">
+          <div className="flex flex-row flex-nowrap gap-4 md:gap-6 justify-center">
+            {allCategories.map(name => {
               const details = categoryDetails[name as keyof typeof categoryDetails];
               return (
                 <CategoryCard 
