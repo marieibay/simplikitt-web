@@ -1,10 +1,5 @@
 import React from 'react';
 import { ImageSepiaFilterIcon } from '../components/icons/ImageSepiaFilterIcon';
-
-// This is a generic base component for simple canvas filter tools
-// To avoid repetition, we can reuse it for blur, sepia, invert, etc.
-// A more robust implementation might put this in its own components/ dir
-// FIX: Changed to a named import since ImageFilterBasePage is now a named export.
 import { ImageFilterBasePage } from './ImageBlurFilterPage'; 
 
 const ImageSepiaFilterPage: React.FC = () => (

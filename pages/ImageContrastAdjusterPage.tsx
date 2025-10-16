@@ -1,6 +1,5 @@
 import React from 'react';
 import { ImageContrastAdjusterIcon } from '../components/icons/ImageContrastAdjusterIcon';
-// FIX: Changed to a named import since ImageFilterBasePage is now a named export.
 import { ImageFilterBasePage } from './ImageBlurFilterPage';
 
 const ImageContrastAdjusterPage: React.FC = () => (

@@ -1,6 +1,5 @@
 import React from 'react';
 import { ImageHueShifterIcon } from '../components/icons/ImageHueShifterIcon';
-// FIX: Changed to a named import since ImageFilterBasePage is now a named export.
 import { ImageFilterBasePage } from './ImageBlurFilterPage';
 
 const ImageHueShifterPage: React.FC = () => (
