@@ -75,6 +75,16 @@ import { ImageShadowGeneratorIcon } from '../components/icons/ImageShadowGenerat
 import { ImageToBlackAndWhiteIcon } from '../components/icons/ImageToBlackAndWhiteIcon';
 import { ImageTilingPreviewerIcon } from '../components/icons/ImageTilingPreviewerIcon';
 import { ImageColorReplacerIcon } from '../components/icons/ImageColorReplacerIcon';
+import { ImageReflectionGeneratorIcon } from '../components/icons/ImageReflectionGeneratorIcon';
+import { ImageLayerMergerIcon } from '../components/icons/ImageLayerMergerIcon';
+import { ImageOpacitySliderIcon } from '../components/icons/ImageOpacitySliderIcon';
+import { ImageCropPresetIcon } from '../components/icons/ImageCropPresetIcon';
+import { ImageMetadataEditorIcon } from '../components/icons/ImageMetadataEditorIcon';
+import { ImageDownloadButtonGeneratorIcon } from '../components/icons/ImageDownloadButtonGeneratorIcon';
+import { ImageZoomPreviewerIcon } from '../components/icons/ImageZoomPreviewerIcon';
+import { ImageHeaderInfoViewerIcon } from '../components/icons/ImageHeaderInfoViewerIcon';
+import { ImageHistogramViewerIcon } from '../components/icons/ImageHistogramViewerIcon';
+import { ImageColorPaletteSaverIcon } from '../components/icons/ImageColorPaletteSaverIcon';
 
 
 // New Page Imports
@@ -128,6 +138,16 @@ import ImageShadowGeneratorPage from '../pages/ImageShadowGeneratorPage';
 import ImageToBlackAndWhitePage from '../pages/ImageToBlackAndWhitePage';
 import ImageTilingPreviewerPage from '../pages/ImageTilingPreviewerPage';
 import ImageColorReplacerPage from '../pages/ImageColorReplacerPage';
+import ImageReflectionGeneratorPage from '../pages/ImageReflectionGeneratorPage';
+import ImageLayerMergerPage from '../pages/ImageLayerMergerPage';
+import ImageOpacitySliderPage from '../pages/ImageOpacitySliderPage';
+import ImageCropPresetPage from '../pages/ImageCropPresetPage';
+import ImageMetadataEditorPage from '../pages/ImageMetadataEditorPage';
+import ImageDownloadButtonGeneratorPage from '../pages/ImageDownloadButtonGeneratorPage';
+import ImageZoomPreviewerPage from '../pages/ImageZoomPreviewerPage';
+import ImageHeaderInfoViewerPage from '../pages/ImageHeaderInfoViewerPage';
+import ImageHistogramViewerPage from '../pages/ImageHistogramViewerPage';
+import ImageColorPaletteSaverPage from '../pages/ImageColorPaletteSaverPage';
 
 
 export const TOOLS: Tool[] = [
@@ -605,6 +625,106 @@ export const TOOLS: Tool[] = [
     Page: ImageColorReplacerPage,
     borderColor: 'border-red-300',
     category: 'Image Tools',
+  },
+  {
+    name: 'Image Reflection Generator',
+    description: 'Creates a realistic ground reflection effect.',
+    path: '/image-reflection-generator',
+    Icon: ImageReflectionGeneratorIcon,
+    Page: ImageReflectionGeneratorPage,
+    borderColor: 'border-blue-300',
+    category: 'Image Tools',
+    isPremium: true,
+  },
+  {
+    name: 'Image Layer Merger',
+    description: 'Merges two uploaded images with blend modes.',
+    path: '/image-layer-merger',
+    Icon: ImageLayerMergerIcon,
+    Page: ImageLayerMergerPage,
+    borderColor: 'border-purple-400',
+    category: 'Image Tools',
+    isPremium: true,
+  },
+  {
+    name: 'Image Opacity Slider',
+    description: 'A visual tool to test opacity levels.',
+    path: '/image-opacity-slider',
+    Icon: ImageOpacitySliderIcon,
+    Page: ImageOpacitySliderPage,
+    borderColor: 'border-gray-400',
+    category: 'Image Tools',
+    isPremium: true,
+  },
+  {
+    name: 'Crop to Aspect Ratio Preset',
+    description: 'Quick buttons for common ratios (Twitter, Instagram, etc.).',
+    path: '/image-crop-preset',
+    Icon: ImageCropPresetIcon,
+    Page: ImageCropPresetPage,
+    borderColor: 'border-rose-600',
+    category: 'Image Tools',
+    isPremium: true,
+  },
+  {
+    name: 'Image Metadata Editor',
+    description: 'Allows editing of basic metadata fields before download.',
+    path: '/image-metadata-editor',
+    Icon: ImageMetadataEditorIcon,
+    Page: ImageMetadataEditorPage,
+    borderColor: 'border-slate-600',
+    category: 'Image Tools',
+    isPremium: true,
+  },
+  {
+    name: 'Download Button Generator',
+    description: 'Generates HTML code for a download button linked to the image.',
+    path: '/image-download-button-generator',
+    Icon: ImageDownloadButtonGeneratorIcon,
+    Page: ImageDownloadButtonGeneratorPage,
+    borderColor: 'border-green-600',
+    category: 'Image Tools',
+    isPremium: true,
+  },
+  {
+    name: 'Image Zoom Previewer',
+    description: 'Allows zooming into a local image file for detail checking.',
+    path: '/image-zoom-previewer',
+    Icon: ImageZoomPreviewerIcon,
+    Page: ImageZoomPreviewerPage,
+    borderColor: 'border-blue-700',
+    category: 'Image Tools',
+    isPremium: true,
+  },
+  {
+    name: 'Image Header Info Viewer',
+    description: 'Displays the initial bytes of image file headers.',
+    path: '/image-header-info-viewer',
+    Icon: ImageHeaderInfoViewerIcon,
+    Page: ImageHeaderInfoViewerPage,
+    borderColor: 'border-gray-700',
+    category: 'Image Tools',
+    isPremium: true,
+  },
+  {
+    name: 'Image Histogram Viewer',
+    description: 'Displays the color histogram of the uploaded image.',
+    path: '/image-histogram-viewer',
+    Icon: ImageHistogramViewerIcon,
+    Page: ImageHistogramViewerPage,
+    borderColor: 'border-indigo-700',
+    category: 'Image Tools',
+    isPremium: true,
+  },
+  {
+    name: 'Image Color Palette Saver',
+    description: 'Saves the extracted colors as a JSON/text list.',
+    path: '/image-color-palette-saver',
+    Icon: ImageColorPaletteSaverIcon,
+    Page: ImageColorPaletteSaverPage,
+    borderColor: 'border-emerald-700',
+    category: 'Image Tools',
+    isPremium: true,
   },
   {
     name: 'JSON Formatter',
