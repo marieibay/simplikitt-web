@@ -167,7 +167,7 @@ export const TOOLS: Tool[] = [
     Icon: ImageConverterIcon,
     Page: ImageConverterPage,
     borderColor: 'border-yellow-500',
-    category: 'Image Tools',
+    category: 'File Converters & Utilities',
   },
   {
     name: 'Bulk Image Resizer',
