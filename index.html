@@ -16,6 +16,7 @@
       }
       body {
         font-family: 'Inter', sans-serif;
+        background-color: #f8fafc; /* bg-slate-50 */
       }
       .checkerboard {
         background-image:
@@ -32,11 +33,12 @@
   <script type="importmap">
 {
   "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.22.3",
+    "react-image-crop": "https://esm.sh/react-image-crop@11.0.5",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.4",
-    "react-image-crop": "https://aistudiocdn.com/react-image-crop@^11.0.9"
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
   }
 }
 </script>
@@ -44,6 +46,6 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <script type="module" src="/index.js"></script>
   </body>
 </html>
