@@ -1,10 +1,10 @@
-
 import React from 'react';
 
 interface CategoryCardProps {
   title: string;
   description: string;
-  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
+  // Fix: Changed Icon prop type to be more generic to accept both SVG and image-based icon components.
+  Icon: React.ComponentType<{ className?: string }>;
   colorName: string;
   href: string;
 }
