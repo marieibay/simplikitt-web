@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ImageBlurFilterIcon } from '../components/icons/ImageBlurFilterIcon';
 
-// FIX: Export ImageFilterBasePage to be reusable in other filter pages
-// FIX: Widen the type for filterName to include all used filter types
 export const ImageFilterBasePage: React.FC<{
     Icon: React.FC<any>;
     title: string;
