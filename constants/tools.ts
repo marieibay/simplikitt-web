@@ -330,6 +330,26 @@ import { DocxToPdfIcon } from '../components/icons/DocxToPdfIcon';
 import DocxToPdfPage from '../pages/DocxToPdfPage';
 import { PdfToDocxIcon } from '../components/icons/PdfToDocxIcon';
 import PdfToDocxPage from '../pages/PdfToDocxPage';
+import { ExcelToCsvIcon } from '../components/icons/ExcelToCsvIcon';
+import ExcelToCsvPage from '../pages/ExcelToCsvPage';
+import { CsvToExcelIcon } from '../components/icons/CsvToExcelIcon';
+import CsvToExcelPage from '../pages/CsvToExcelPage';
+import { TsvToCsvIcon } from '../components/icons/TsvToCsvIcon';
+import TsvToCsvPage from '../pages/TsvToCsvPage';
+import { FileMergerIcon } from '../components/icons/FileMergerIcon';
+import FileMergerPage from '../pages/FileMergerPage';
+import { BatchFileRenamerIcon } from '../components/icons/BatchFileRenamerIcon';
+import BatchFileRenamerPage from '../pages/BatchFileRenamerPage';
+import { FileChecksumCalculatorIcon } from '../components/icons/FileChecksumCalculatorIcon';
+import FileChecksumCalculatorPage from '../pages/FileChecksumCalculatorPage';
+import { FileExtensionChangerIcon } from '../components/icons/FileExtensionChangerIcon';
+import FileExtensionChangerPage from '../pages/FileExtensionChangerPage';
+import { DocxToTextExtractorIcon } from '../components/icons/DocxToTextExtractorIcon';
+import DocxToTextExtractorPage from '../pages/DocxToTextExtractorPage';
+import { PptxToTextExtractorIcon } from '../components/icons/PptxToTextExtractorIcon';
+import PptxToTextExtractorPage from '../pages/PptxToTextExtractorPage';
+import { FileSizeConverterIcon } from '../components/icons/FileSizeConverterIcon';
+import FileSizeConverterPage from '../pages/FileSizeConverterPage';
 
 // Calculators & Time Tools
 import { PercentageCalculatorIcon } from '../components/icons/PercentageCalculatorIcon';
@@ -548,6 +568,16 @@ export const TOOLS: Tool[] = [
   // File Converters & Utilities
   { name: 'DOCX to PDF', description: 'Convert DOCX files to PDF.', path: '/docx-to-pdf', Icon: DocxToPdfIcon, Page: DocxToPdfPage, isPremium: true, borderColor: 'border-purple-500', category: 'File Converters & Utilities' },
   { name: 'PDF to DOCX', description: 'Convert PDF files to DOCX.', path: '/pdf-to-docx', Icon: PdfToDocxIcon, Page: PdfToDocxPage, isPremium: true, borderColor: 'border-purple-500', category: 'File Converters & Utilities' },
+  { name: 'Excel (XLSX) to CSV', description: 'Convert XLSX files to CSV.', path: '/excel-to-csv', Icon: ExcelToCsvIcon, Page: ExcelToCsvPage, borderColor: 'border-purple-500', category: 'File Converters & Utilities' },
+  { name: 'CSV to Excel (XLSX)', description: 'Convert CSV files to XLSX.', path: '/csv-to-excel', Icon: CsvToExcelIcon, Page: CsvToExcelPage, borderColor: 'border-purple-500', category: 'File Converters & Utilities' },
+  { name: 'TSV to CSV', description: 'Convert Tab-Separated Values to Comma-Separated.', path: '/tsv-to-csv', Icon: TsvToCsvIcon, Page: TsvToCsvPage, borderColor: 'border-purple-500', category: 'File Converters & Utilities' },
+  { name: 'File Merger', description: 'Combine multiple text or CSV files.', path: '/file-merger', Icon: FileMergerIcon, Page: FileMergerPage, isPremium: true, borderColor: 'border-purple-500', category: 'File Converters & Utilities' },
+  { name: 'Batch File Renamer', description: 'Rename multiple files based on a pattern.', path: '/batch-file-renamer', Icon: BatchFileRenamerIcon, Page: BatchFileRenamerPage, isPremium: true, borderColor: 'border-purple-500', category: 'File Converters & Utilities' },
+  { name: 'File Checksum Calculator', description: 'Calculate SHA-256 checksum for any file.', path: '/file-checksum-calculator', Icon: FileChecksumCalculatorIcon, Page: FileChecksumCalculatorPage, borderColor: 'border-purple-500', category: 'File Converters & Utilities' },
+  { name: 'File Extension Changer', description: 'Change the extension of a file.', path: '/file-extension-changer', Icon: FileExtensionChangerIcon, Page: FileExtensionChangerPage, borderColor: 'border-purple-500', category: 'File Converters & Utilities' },
+  { name: 'DOCX to Text Extractor', description: 'Extract plain text from a DOCX file.', path: '/docx-to-text-extractor', Icon: DocxToTextExtractorIcon, Page: DocxToTextExtractorPage, borderColor: 'border-purple-500', category: 'File Converters & Utilities' },
+  { name: 'PPTX to Text Extractor', description: 'Extract text from a PPTX file.', path: '/pptx-to-text-extractor', Icon: PptxToTextExtractorIcon, Page: PptxToTextExtractorPage, isPremium: true, borderColor: 'border-purple-500', category: 'File Converters & Utilities' },
+  { name: 'File Size Converter', description: 'Convert between B, KB, MB, GB.', path: '/file-size-converter', Icon: FileSizeConverterIcon, Page: FileSizeConverterPage, borderColor: 'border-purple-500', category: 'File Converters & Utilities' },
 
   // Calculators & Time Tools
   { name: 'Percentage Calculator', description: 'Calculate percentages.', path: '/percentage-calculator', Icon: PercentageCalculatorIcon, Page: PercentageCalculatorPage, borderColor: 'border-teal-500', category: 'Calculators & Time Tools' },
