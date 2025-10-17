@@ -6,6 +6,9 @@ export const CssPrettifierIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => (
     <path d="M12 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2" />
     <path d="M12 2H9" />
     <path d="M15 22H9" />
-    <path d="M4 12h16" />
+    <path d="M4 8h2" />
+    <path d="M4 16h2" />
+    <path d="M20 8h-2" />
+    <path d="M20 16h-2" />
   </svg>
 );

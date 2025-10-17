@@ -5,8 +5,7 @@ import { ImageFilterBasePage } from './ImageBlurFilterPage';
 const ImageToBlackAndWhitePage: React.FC = () => (
     <ImageFilterBasePage
         Icon={ImageToBlackAndWhiteIcon}
-        title="Adjustable Black & White"
-        // FIX: Changed color from "black" to "gray" to match valid color classes.
+        title="Image to Black & White"
         color="gray"
         filterName="grayscale"
         initialValue={100}

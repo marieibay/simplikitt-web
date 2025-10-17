@@ -2,31 +2,43 @@ import React, { useState } from 'react';
 import { StringConcatenatorIcon } from '../components/icons/StringConcatenatorIcon';
 
 const StringConcatenatorPage: React.FC = () => {
-  const [input, setInput] = useState('Line 1\nLine 2\nLine 3');
+  const [list, setList] = useState('Apple\nBanana\nOrange');
+  const [delimiter, setDelimiter] = useState(', ');
   const [output, setOutput] = useState('');
-  const [separator, setSeparator] = useState(', ');
+  const [copied, setCopied] = useState(false);
 
   const concatenate = () => {
-    const lines = input.split('\n').filter(line => line.trim() !== '');
-    setOutput(lines.join(separator));
+    const lines = list.split('\n').filter(line => line.trim() !== '');
+    setOutput(lines.join(delimiter));
+  };
+  
+  const copyToClipboard = () => {
+    if (output) {
+      navigator.clipboard.writeText(output);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <StringConcatenatorIcon className="w-10 h-10 text-sky-600" />
+        <StringConcatenatorIcon className="w-10 h-10 text-blue-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">String Concatenator</h1>
       </div>
-      <div className="bg-white p-6 rounded-lg shadow-md border space-y-4">
+      <div className="space-y-4">
         <div>
-          <label className="block font-medium">Separator</label>
-          <input value={separator} onChange={e => setSeparator(e.target.value)} className="w-full p-2 border rounded-md"/>
+          <label>Delimiter</label>
+          <input value={delimiter} onChange={e => setDelimiter(e.target.value)} className="w-full p-2 border rounded" />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <textarea value={input} onChange={e => setInput(e.target.value)} className="w-full h-64 p-3 border rounded-lg" placeholder="Input lines..."/>
-            <textarea value={output} readOnly className="w-full h-64 p-3 border rounded-lg bg-gray-50" placeholder="Output..."/>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <textarea value={list} onChange={e => setList(e.target.value)} className="w-full h-64 p-3 border rounded-lg" placeholder="List of items, one per line..." />
+          <textarea value={output} readOnly className="w-full h-64 p-3 border rounded-lg bg-gray-50" placeholder="Concatenated string..." />
         </div>
-        <button onClick={concatenate} className="px-5 py-2.5 bg-sky-600 text-white font-bold rounded-lg">Concatenate</button>
+        <div className="flex gap-4 items-center">
+            <button onClick={concatenate} className="px-5 py-2.5 bg-blue-500 text-white font-bold rounded-lg">Concatenate</button>
+             <button onClick={copyToClipboard} disabled={!output} className="px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg">{copied ? 'Copied!' : 'Copy'}</button>
+        </div>
       </div>
     </div>
   );
