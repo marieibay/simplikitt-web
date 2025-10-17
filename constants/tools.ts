@@ -359,8 +359,6 @@ import FileTypeCheckerPage from '../pages/FileTypeCheckerPage';
 // Calculators & Time Tools
 import { PercentageCalculatorIcon } from '../components/icons/PercentageCalculatorIcon';
 import PercentageCalculatorPage from '../pages/PercentageCalculatorPage';
-import { TimestampConverterIcon } from '../components/icons/TimestampConverterIcon';
-import TimestampConverterPage from '../pages/TimestampConverterPage';
 import { DateDifferenceIcon } from '../components/icons/DateDifferenceIcon';
 import DateDifferencePage from '../pages/DateDifferencePage';
 import { AgeCalculatorIcon } from '../components/icons/AgeCalculatorIcon';
@@ -455,6 +453,8 @@ import { PasswordGeneratorIcon } from '../components/icons/PasswordGeneratorIcon
 import PasswordGeneratorPage from '../pages/PasswordGeneratorPage';
 import { UrlEncoderDecoderIcon } from '../components/icons/UrlEncoderDecoderIcon';
 import UrlEncoderDecoderPage from '../pages/UrlEncoderDecoderPage';
+import { TimestampConverterIcon } from '../components/icons/TimestampConverterIcon';
+import TimestampConverterPage from '../pages/TimestampConverterPage';
 import { QrCodeGeneratorIcon } from '../components/icons/QrCodeGeneratorIcon';
 import QrCodeGeneratorPage from '../pages/QrCodeGeneratorPage';
 import { YouTubeExtractorIcon } from '../components/icons/YouTubeExtractorIcon';
@@ -483,6 +483,16 @@ import { PlainTextToHtmlConverterIcon } from '../components/icons/PlainTextToHtm
 import PlainTextToHtmlConverterPage from '../pages/PlainTextToHtmlConverterPage';
 import { HtmlToPlainTextConverterIcon } from '../components/icons/HtmlToPlainTextConverterIcon';
 import HtmlToPlainTextConverterPage from '../pages/HtmlToPlainTextConverterPage';
+import { JsonValidatorIcon } from '../components/icons/JsonValidatorIcon';
+import JsonValidatorPage from '../pages/JsonValidatorPage';
+import { Base64TextEncoderDecoderIcon } from '../components/icons/Base64TextEncoderDecoderIcon';
+import Base64TextEncoderDecoderPage from '../pages/Base64TextEncoderDecoderPage';
+import { Md5HashGeneratorIcon } from '../components/icons/Md5HashGeneratorIcon';
+import Md5HashGeneratorPage from '../pages/Md5HashGeneratorPage';
+import { Sha256HashGeneratorIcon } from '../components/icons/Sha256HashGeneratorIcon';
+import Sha256HashGeneratorPage from '../pages/Sha256HashGeneratorPage';
+import { JsonMinifierIcon } from '../components/icons/JsonMinifierIcon';
+import JsonMinifierPage from '../pages/JsonMinifierPage';
 
 export const TOOLS: Tool[] = [
   // Image Tools
@@ -672,7 +682,6 @@ export const TOOLS: Tool[] = [
 
   // Calculators & Time Tools
   { name: 'Percentage Calculator', description: 'Calculate percentages for various scenarios.', path: '/percentage-calculator', Icon: PercentageCalculatorIcon, Page: PercentageCalculatorPage, borderColor: 'border-teal-500', category: 'Calculators & Time Tools' },
-  { name: 'Timestamp Converter', description: 'Convert between Unix timestamps and dates.', path: '/timestamp-converter', Icon: TimestampConverterIcon, Page: TimestampConverterPage, borderColor: 'border-blue-800', category: 'Calculators & Time Tools' },
   { name: 'Date Difference Calculator', description: 'Calculate the duration between two dates.', path: '/date-difference-calculator', Icon: DateDifferenceIcon, Page: DateDifferencePage, borderColor: 'border-sky-500', category: 'Calculators & Time Tools' },
   { name: 'Age Calculator', description: 'Calculate age from a date of birth.', path: '/age-calculator', Icon: AgeCalculatorIcon, Page: AgeCalculatorPage, borderColor: 'border-rose-500', category: 'Calculators & Time Tools' },
   { name: 'Time Zone Converter', description: 'Convert time between different time zones.', path: '/time-zone-converter', Icon: TimeZoneConverterIcon, Page: TimeZoneConverterPage, borderColor: 'border-indigo-500', category: 'Calculators & Time Tools' },
@@ -685,8 +694,8 @@ export const TOOLS: Tool[] = [
   { name: 'Aspect Ratio Calculator', description: 'Calculate aspect ratios for images and videos.', path: '/aspect-ratio-calculator', Icon: AspectRatioCalculatorIcon, Page: AspectRatioCalculatorPage, borderColor: 'border-cyan-500', category: 'Calculators & Time Tools' },
   { name: 'Scientific Calculator', description: 'An advanced calculator for scientific calculations.', path: '/scientific-calculator', Icon: ScientificCalculatorIcon, Page: ScientificCalculatorPage, borderColor: 'border-teal-500', category: 'Calculators & Time Tools', isPremium: true },
   { name: 'Compound Interest Calculator', description: 'Calculate compound interest over time.', path: '/compound-interest-calculator', Icon: CompoundInterestCalculatorIcon, Page: CompoundInterestCalculatorPage, borderColor: 'border-teal-500', category: 'Calculators & Time Tools', isPremium: true },
-  { name: 'Countdown Timer', description: 'A simple countdown timer.', path: '/countdown-timer', Icon: CountdownTimerIcon, Page: CountdownTimerPage, borderColor: 'border-teal-500', category: 'Calculators & Time Tools', isPremium: true },
-  { name: 'Stopwatch', description: 'A simple stopwatch tool.', path: '/stopwatch', Icon: StopwatchIcon, Page: StopwatchPage, borderColor: 'border-teal-500', category: 'Calculators & Time Tools', isPremium: true },
+  { name: 'Countdown Timer', description: 'A simple countdown timer.', path: '/countdown-timer', Icon: CountdownTimerIcon, Page: CountdownTimerPage, borderColor: 'border-teal-500', category: 'Calculators & Time Tools' },
+  { name: 'Stopwatch', description: 'A simple stopwatch tool.', path: '/stopwatch', Icon: StopwatchIcon, Page: StopwatchPage, borderColor: 'border-teal-500', category: 'Calculators & Time Tools' },
   { name: 'Date Format Converter', description: 'Convert dates between different formats.', path: '/date-format-converter', Icon: DateFormatConverterIcon, Page: DateFormatConverterPage, borderColor: 'border-teal-500', category: 'Calculators & Time Tools' },
   { name: 'Day of the Week Calculator', description: 'Find the day of the week for any date.', path: '/day-of-the-week-calculator', Icon: DayOfTheWeekCalculatorIcon, Page: DayOfTheWeekCalculatorPage, borderColor: 'border-teal-500', category: 'Calculators & Time Tools' },
   { name: 'Leap Year Checker', description: 'Check if a year is a leap year.', path: '/leap-year-checker', Icon: LeapYearCheckerIcon, Page: LeapYearCheckerPage, borderColor: 'border-teal-500', category: 'Calculators & Time Tools' },
@@ -719,8 +728,9 @@ export const TOOLS: Tool[] = [
 
   // Web & Developer Tools
   { name: 'JSON Formatter', description: 'Beautify and validate your JSON data.', path: '/json-formatter', Icon: JsonFormatterIcon, Page: JsonFormatterPage, borderColor: 'border-blue-500', category: 'Web & Developer Tools' },
-  { name: 'Password Generator', description: 'Create secure, random passwords.', path: '/password-generator', Icon: PasswordGeneratorIcon, Page: PasswordGeneratorPage, borderColor: 'border-orange-500', category: 'Web & Developer Tools' },
+  { name: 'Password Generator', description: 'Create secure, random passwords.', path: '/password-generator', Icon: PasswordGeneratorIcon, Page: PasswordGeneratorPage, borderColor: 'border-orange-500', category: 'Calculators & Time Tools' },
   { name: 'URL Encoder / Decoder', description: 'Encode or decode URL components.', path: '/url-encoder-decoder', Icon: UrlEncoderDecoderIcon, Page: UrlEncoderDecoderPage, borderColor: 'border-pink-500', category: 'Web & Developer Tools' },
+  { name: 'Timestamp Converter', description: 'Convert between Unix timestamps and dates.', path: '/timestamp-converter', Icon: TimestampConverterIcon, Page: TimestampConverterPage, borderColor: 'border-blue-800', category: 'Calculators & Time Tools' },
   { name: 'QR Code Generator', description: 'Create QR codes from text or URLs.', path: '/qr-code-generator', Icon: QrCodeGeneratorIcon, Page: QrCodeGeneratorPage, borderColor: 'border-indigo-500', category: 'Web & Developer Tools' },
   { name: 'YouTube Content Extractor', description: 'Extract title and description from YouTube page source.', path: '/youtube-extractor', Icon: YouTubeExtractorIcon, Page: YouTubeExtractorPage, borderColor: 'border-red-500', category: 'Web & Developer Tools' },
   { name: 'Link Extractor from Text', description: 'Extract all links from a block of text.', path: '/link-extractor', Icon: LinkExtractorIcon, Page: LinkExtractorPage, borderColor: 'border-blue-600', category: 'Web & Developer Tools' },
@@ -735,6 +745,11 @@ export const TOOLS: Tool[] = [
   { name: 'JSON Data Extractor', description: 'Extract data from a JSON object using a path.', path: '/json-data-extractor', Icon: JsonDataExtractorIcon, Page: JsonDataExtractorPage, borderColor: 'border-blue-600', category: 'Web & Developer Tools', isPremium: true },
   { name: 'Plain Text to HTML', description: 'Convert plain text to HTML paragraphs and line breaks.', path: '/plain-text-to-html', Icon: PlainTextToHtmlConverterIcon, Page: PlainTextToHtmlConverterPage, borderColor: 'border-emerald-500', category: 'Web & Developer Tools' },
   { name: 'HTML to Plain Text', description: 'Strip all HTML tags to get plain text.', path: '/html-to-plain-text', Icon: HtmlToPlainTextConverterIcon, Page: HtmlToPlainTextConverterPage, borderColor: 'border-emerald-600', category: 'Web & Developer Tools' },
+  { name: 'JSON Validator', description: 'Validate the syntax of your JSON data.', path: '/json-validator', Icon: JsonValidatorIcon, Page: JsonValidatorPage, borderColor: 'border-blue-600', category: 'Web & Developer Tools' },
+  { name: 'Base64 Text Encoder/Decoder', description: 'Encode and decode text using Base64.', path: '/base64-text-encoder-decoder', Icon: Base64TextEncoderDecoderIcon, Page: Base64TextEncoderDecoderPage, borderColor: 'border-gray-500', category: 'Web & Developer Tools' },
+  { name: 'MD5 Hash Generator', description: 'Generate an MD5 hash from a text string.', path: '/md5-hash-generator', Icon: Md5HashGeneratorIcon, Page: Md5HashGeneratorPage, borderColor: 'border-red-500', category: 'Web & Developer Tools' },
+  { name: 'SHA-256 Hash Generator', description: 'Generate a SHA-256 hash from a text string.', path: '/sha256-hash-generator', Icon: Sha256HashGeneratorIcon, Page: Sha256HashGeneratorPage, borderColor: 'border-red-600', category: 'Web & Developer Tools' },
+  { name: 'JSON Minifier', description: 'Compress JSON data by removing whitespace.', path: '/json-minifier', Icon: JsonMinifierIcon, Page: JsonMinifierPage, borderColor: 'border-blue-700', category: 'Web & Developer Tools' },
 ];
 
 export const POPULAR_PATHS = [
