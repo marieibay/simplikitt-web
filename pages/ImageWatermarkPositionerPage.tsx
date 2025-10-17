@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { ImageWatermarkPositionerIcon } from '../components/icons/ImageWatermarkPositionerIcon';
 
 const ImageWatermarkPositionerPage: React.FC = () => {
@@ -21,7 +22,7 @@ const ImageWatermarkPositionerPage: React.FC = () => {
         }
     };
     
-    const applyWatermark = () => {
+    const applyWatermark = useCallback(() => {
         const canvas = canvasRef.current;
         const baseImg = baseImgRef.current;
         const watermarkImg = watermarkImgRef.current;
@@ -57,7 +58,7 @@ const ImageWatermarkPositionerPage: React.FC = () => {
         ctx.globalAlpha = 1.0;
         
         setPreviewUrl(canvas.toDataURL('image/png'));
-    };
+    }, [opacity, position, scale]);
     
     useEffect(() => {
         if (baseImage) {
@@ -68,7 +69,7 @@ const ImageWatermarkPositionerPage: React.FC = () => {
             };
             reader.readAsDataURL(baseImage);
         }
-    }, [baseImage]);
+    }, [baseImage, applyWatermark]);
 
     useEffect(() => {
         if (watermarkImage) {
@@ -79,12 +80,11 @@ const ImageWatermarkPositionerPage: React.FC = () => {
             };
             reader.readAsDataURL(watermarkImage);
         }
-    }, [watermarkImage]);
+    }, [watermarkImage, applyWatermark]);
 
     useEffect(() => {
         applyWatermark();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [position, opacity, scale]);
+    }, [position, opacity, scale, applyWatermark]);
     
     const handleDownload = () => {
         const canvas = canvasRef.current;

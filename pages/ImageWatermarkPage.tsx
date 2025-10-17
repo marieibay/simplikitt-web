@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { ImageWatermarkIcon } from '../components/icons/ImageWatermarkIcon';
 
 const ImageWatermarkPage: React.FC = () => {
@@ -22,7 +23,7 @@ const ImageWatermarkPage: React.FC = () => {
         }
     };
     
-    const applyWatermark = () => {
+    const applyWatermark = useCallback(() => {
         const canvas = canvasRef.current;
         const baseImg = baseImgRef.current;
         const watermarkImg = watermarkImgRef.current;
@@ -57,7 +58,7 @@ const ImageWatermarkPage: React.FC = () => {
         ctx.globalAlpha = 1.0;
         
         setPreviewUrl(canvas.toDataURL('image/png'));
-    };
+    }, [opacity, position, scale]);
     
     useEffect(() => {
         let baseReader: FileReader | null = null;
@@ -78,13 +79,11 @@ const ImageWatermarkPage: React.FC = () => {
             };
             watermarkReader.readAsDataURL(watermarkImage);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [baseImage, watermarkImage]);
+    }, [baseImage, watermarkImage, applyWatermark]);
 
     useEffect(() => {
         applyWatermark();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [position, opacity, scale]);
+    }, [position, opacity, scale, applyWatermark]);
     
     const handleDownload = () => {
         const canvas = canvasRef.current;

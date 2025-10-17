@@ -1,14 +1,14 @@
 
 import React from 'react';
-import { StopwatchIcon } from '../components/icons/StopwatchIcon';
+import { DecimalFractionConverterIcon } from '../components/icons/DecimalFractionConverterIcon';
 import { LockIcon } from '../components/icons/LockIcon';
 
-const StopwatchPage: React.FC = () => {
+const DecimalFractionConverterPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <StopwatchIcon className="w-10 h-10 text-teal-500" />
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Stopwatch</h1>
+        <DecimalFractionConverterIcon className="w-10 h-10 text-teal-500" />
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Decimal to Fraction Converter</h1>
       </div>
       <div className="p-8 md:p-12 border-2 border-dashed border-gray-300 rounded-lg text-center bg-gray-50">
         <div className="w-16 h-16 mx-auto bg-yellow-100 rounded-full flex items-center justify-center">
@@ -16,7 +16,7 @@ const StopwatchPage: React.FC = () => {
         </div>
         <h2 className="mt-6 text-2xl font-bold text-gray-800">Premium Feature</h2>
         <p className="mt-2 text-gray-600 max-w-md mx-auto">
-          The stopwatch is a premium feature. Please upgrade your membership to unlock this tool.
+          The decimal to fraction converter is a premium feature. Please upgrade your membership to unlock this tool.
         </p>
         <button className="mt-8 px-8 py-3 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition shadow-lg text-lg">
           Unlock with Premium
@@ -26,4 +26,4 @@ const StopwatchPage: React.FC = () => {
   );
 };
 
-export default StopwatchPage;
+export default DecimalFractionConverterPage;
