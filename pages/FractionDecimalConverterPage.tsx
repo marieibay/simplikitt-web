@@ -1,26 +1,43 @@
-
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { FractionDecimalConverterIcon } from '../components/icons/FractionDecimalConverterIcon';
-import { LockIcon } from '../components/icons/LockIcon';
 
 const FractionDecimalConverterPage: React.FC = () => {
+  const [fraction, setFraction] = useState('1/2');
+
+  const decimal = useMemo(() => {
+    try {
+      const parts = fraction.split('/');
+      if (parts.length !== 2) return 'Invalid fraction';
+      const numerator = parseFloat(parts[0]);
+      const denominator = parseFloat(parts[1]);
+      if (isNaN(numerator) || isNaN(denominator) || denominator === 0) return 'Invalid fraction';
+      return (numerator / denominator).toFixed(6);
+    } catch {
+      return 'Invalid fraction';
+    }
+  }, [fraction]);
+
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
         <FractionDecimalConverterIcon className="w-10 h-10 text-teal-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Fraction to Decimal Converter</h1>
       </div>
-      <div className="p-8 md:p-12 border-2 border-dashed border-gray-300 rounded-lg text-center bg-gray-50">
-        <div className="w-16 h-16 mx-auto bg-yellow-100 rounded-full flex items-center justify-center">
-          <LockIcon className="w-8 h-8 text-yellow-500" />
+      <div className="bg-white p-6 rounded-lg shadow-md border max-w-md mx-auto space-y-4 text-center">
+        <div>
+          <label htmlFor="fraction-input" className="block font-medium">Enter a Fraction (e.g., 3/4)</label>
+          <input 
+            type="text" 
+            id="fraction-input" 
+            value={fraction} 
+            onChange={e => setFraction(e.target.value)} 
+            className="w-full p-2 border rounded-md mt-1 text-center text-xl"
+          />
         </div>
-        <h2 className="mt-6 text-2xl font-bold text-gray-800">Premium Feature</h2>
-        <p className="mt-2 text-gray-600 max-w-md mx-auto">
-          The fraction to decimal converter is a premium feature. Please upgrade your membership to unlock this tool.
-        </p>
-        <button className="mt-8 px-8 py-3 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition shadow-lg text-lg">
-          Unlock with Premium
-        </button>
+        <div>
+            <p className="text-lg">Decimal Equivalent</p>
+            <p className="text-4xl font-bold text-teal-600">{decimal}</p>
+        </div>
       </div>
     </div>
   );
