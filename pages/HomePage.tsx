@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { CategoryCard } from '../components/CategoryCard';
 import { ToolCard } from '../components/ToolCard';
 import { allCategories, categoryDetails } from '../constants/categories';
 import { TOOLS, POPULAR_PATHS } from '../constants/tools';
 import { slugify } from '../utils/helpers';
-import { useSearch } from '../contexts/SearchContext';
 import {
   ImageCategoryIcon,
   TextCategoryIcon,
@@ -26,22 +25,7 @@ const categoryIcons: { [key: string]: React.FC<any> } = {
 
 
 const HomePage: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState('All Tools');
-  const { searchQuery } = useSearch();
-  
   const popularTools = TOOLS.filter(tool => POPULAR_PATHS.includes(tool.path));
-
-  const toolsByCategory = activeFilter === 'All Tools'
-    ? popularTools
-    : popularTools.filter(tool => tool.category === activeFilter);
-  
-  const filteredTools = searchQuery
-    ? toolsByCategory.filter(tool => 
-        tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tool.description.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : toolsByCategory;
-
 
   return (
     <>
@@ -86,36 +70,38 @@ const HomePage: React.FC = () => {
             </div>
             
             <div className="flex justify-center flex-wrap gap-2 md:gap-3 mb-10">
-                {['All Tools', ...allCategories].map(filter => {
-                    const isActive = activeFilter === filter;
-                    const Icon = filter === 'All Tools' ? null : categoryIcons[filter];
+                {['All Tools', ...allCategories].map(categoryName => {
+                    const isAllTools = categoryName === 'All Tools';
+                    const toPath = isAllTools ? '/tools' : `/category/${slugify(categoryName)}`;
+                    const Icon = isAllTools ? null : categoryIcons[categoryName];
+                    
+                    const className = isAllTools 
+                        ? 'px-4 py-2 text-sm font-semibold rounded-full transition-colors flex items-center gap-2 border bg-blue-600 text-white border-blue-600 shadow' 
+                        : 'px-4 py-2 text-sm font-semibold rounded-full transition-colors flex items-center gap-2 border bg-white text-gray-700 border-gray-300 hover:bg-gray-100 hover:border-gray-400';
+
                     return (
-                        <button
-                            key={filter}
-                            onClick={() => setActiveFilter(filter)}
-                            className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors flex items-center gap-2 border ${
-                                isActive 
-                                ? 'bg-blue-600 text-white border-blue-600 shadow' 
-                                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100 hover:border-gray-400'
-                            }`}
+                        <Link
+                            key={categoryName}
+                            to={toPath}
+                            className={className}
                         >
                             {Icon && <Icon className="w-4 h-4" />}
-                            {filter}
-                        </button>
+                            {categoryName}
+                        </Link>
                     );
                 })}
             </div>
 
-            {filteredTools.length > 0 ? (
+            {popularTools.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {filteredTools.map(tool => (
+                    {popularTools.map(tool => (
                         <ToolCard key={tool.path} tool={tool} />
                     ))}
                 </div>
             ) : (
                 <div className="text-center py-12 text-gray-500">
-                    <h3 className="text-xl font-semibold">No Tools Found</h3>
-                    <p>Try adjusting your search or filter.</p>
+                    <h3 className="text-xl font-semibold">No Popular Tools Defined</h3>
+                    <p>Check back later!</p>
                 </div>
             )}
             
