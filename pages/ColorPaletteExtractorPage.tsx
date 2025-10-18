@@ -58,6 +58,17 @@ const ColorPaletteExtractorPage: React.FC = () => {
         };
     };
 
+    const handleSavePalette = () => {
+        const text = palette.join('\n');
+        const blob = new Blob([text], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'palette.txt';
+        link.click();
+        URL.revokeObjectURL(url);
+    };
+
     return (
         <div className="container mx-auto p-4 md:p-8">
             <div className="flex items-center gap-4 mb-8">
@@ -79,13 +90,16 @@ const ColorPaletteExtractorPage: React.FC = () => {
                 <div>
                     <h3 className="text-xl font-semibold mb-2">Extracted Colors</h3>
                     {palette.length > 0 ? (
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                            {palette.map((color, index) => (
-                                <div key={index} className="text-center">
-                                    <div className="w-full h-24 rounded-lg shadow-inner border" style={{ backgroundColor: color }}></div>
-                                    <p className="mt-2 font-mono text-sm">{color}</p>
-                                </div>
-                            ))}
+                        <div>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                {palette.map((color, index) => (
+                                    <div key={index} className="text-center">
+                                        <div className="w-full h-24 rounded-lg shadow-inner border" style={{ backgroundColor: color }}></div>
+                                        <p className="mt-2 font-mono text-sm">{color}</p>
+                                    </div>
+                                ))}
+                            </div>
+                            <button onClick={handleSavePalette} className="mt-4 px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg">Save Palette</button>
                         </div>
                     ) : (
                         <div className="p-8 border-2 border-dashed border-gray-300 rounded-lg text-center min-h-[200px] flex items-center justify-center">

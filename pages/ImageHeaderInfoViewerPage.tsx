@@ -1,28 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ImageHeaderInfoViewerIcon } from '../components/icons/ImageHeaderInfoViewerIcon';
-import { LockIcon } from '../components/icons/LockIcon';
 
 const ImageHeaderInfoViewerPage: React.FC = () => {
-  return (
-    <div className="container mx-auto p-4 md:p-8">
-      <div className="flex items-center gap-4 mb-8">
-        <ImageHeaderInfoViewerIcon className="w-10 h-10 text-gray-700" />
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Image Header Info Viewer</h1>
-      </div>
-      <div className="p-8 md:p-12 border-2 border-dashed border-gray-300 rounded-lg text-center bg-gray-50">
-        <div className="w-16 h-16 mx-auto bg-yellow-100 rounded-full flex items-center justify-center">
-          <LockIcon className="w-8 h-8 text-yellow-500" />
+    const [header, setHeader] = useState('');
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const buffer = e.target?.result as ArrayBuffer;
+                const view = new Uint8Array(buffer, 0, 16);
+                const hex = Array.from(view).map(b => b.toString(16).padStart(2, '0')).join(' ');
+                setHeader(hex.toUpperCase());
+            }
+            reader.readAsArrayBuffer(file);
+        }
+    }
+
+    return (
+        <div className="container mx-auto p-4 md:p-8">
+            <div className="flex items-center gap-4 mb-8">
+                <ImageHeaderInfoViewerIcon className="w-10 h-10 text-gray-700" />
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-800">File Header Info Viewer</h1>
+            </div>
+            <input type="file" onChange={handleFileChange} />
+            {header && <pre className="mt-4 p-4 bg-gray-100 rounded font-mono">{header}</pre>}
         </div>
-        <h2 className="mt-6 text-2xl font-bold text-gray-800">Premium Feature</h2>
-        <p className="mt-2 text-gray-600 max-w-md mx-auto">
-          This is a premium feature. Please upgrade your membership to unlock this tool and enhance your images.
-        </p>
-        <button className="mt-8 px-8 py-3 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition shadow-lg text-lg">
-          Unlock with Premium
-        </button>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default ImageHeaderInfoViewerPage;

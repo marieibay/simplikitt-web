@@ -5,7 +5,6 @@ export const StringToArrayIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => (
     <path d="M4 6h16" />
     <path d="M4 12h16" />
     <path d="M4 18h16" />
-    <path d="m16 7-3-3-3 3" />
-    <path d="m8 17 3 3 3-3" />
+    <path d="m18 9-3 3 3 3" />
   </svg>
 );
