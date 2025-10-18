@@ -14,7 +14,6 @@ export const Header: React.FC = () => {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
-    // Navigate to the all tools page if we're not already there
     if (location.pathname !== '/tools') {
       navigate('/tools');
     }
@@ -29,16 +28,33 @@ export const Header: React.FC = () => {
     return acc;
   }, {});
 
+  const handleBackClick = () => {
+    navigate(-1); // Use standard browser back behavior
+  };
+
+  const showBackButton = !['/', '/tools'].includes(location.pathname);
+
   return (
     <header className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-200">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Left: Logo and Brand */}
-        <Link to="/" className="flex items-center gap-3 group flex-shrink-0" aria-label="SimpliKitt Home">
-          <SimpliKittLogo className="h-9 w-auto transition-transform duration-300 group-hover:rotate-12" />
-          <span className="text-2xl font-bold text-gray-800 tracking-tight hidden sm:block">
-            SimpliKitt
-          </span>
-        </Link>
+        {/* Left: Back Button + Logo and Brand */}
+        <div className="flex items-center gap-3 flex-shrink-0">
+            {showBackButton && (
+                 <button 
+                    onClick={handleBackClick} 
+                    aria-label="Go back"
+                    className="p-2 -ml-2 rounded-full text-gray-500 hover:bg-gray-200 hover:text-gray-800 transition-colors"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+            )}
+            <Link to="/" className="flex items-center gap-3 group" aria-label="SimpliKitt Home">
+              <SimpliKittLogo className="h-9 w-auto transition-transform duration-300 group-hover:rotate-12" />
+              <span className="text-2xl font-bold text-gray-800 tracking-tight hidden sm:block">
+                SimpliKitt
+              </span>
+            </Link>
+        </div>
 
         {/* Center: Navigation Dropdowns */}
         <nav className="hidden lg:flex items-center gap-1 mx-4">

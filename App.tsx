@@ -1,5 +1,5 @@
-import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { HashRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { SearchProvider } from './contexts/SearchContext';
 import { TOOLS } from './constants/tools';
@@ -12,10 +12,31 @@ import TermsOfServicePage from './pages/TermsOfServicePage';
 import ContactPage from './pages/ContactPage';
 import AboutPage from './pages/AboutPage';
 
+const InitialPageHandler: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // This effect ensures that on the very first load of a session (e.g., new tab),
+    // the user is always directed to the homepage, regardless of the URL hash.
+    // Subsequent reloads within the same tab session will behave normally.
+    if (!sessionStorage.getItem('simpliKittSessionStarted')) {
+      sessionStorage.setItem('simpliKittSessionStarted', 'true');
+      if (location.pathname !== '/') {
+        navigate('/', { replace: true });
+      }
+    }
+  }, [navigate, location.pathname]); // Dependencies ensure hooks are correctly used.
+
+  return null; // This component does not render anything.
+};
+
+
 const App: React.FC = () => {
   return (
     <SearchProvider>
       <HashRouter>
+        <InitialPageHandler />
         <Layout>
           <Routes>
             <Route path="/" element={<HomePage />} />
