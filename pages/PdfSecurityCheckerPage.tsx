@@ -1,28 +1,83 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PdfSecurityCheckerIcon } from '../components/icons/PdfSecurityCheckerIcon';
-import { LockIcon } from '../components/icons/LockIcon';
+
+declare const pdfjsLib: any;
+
+interface SecurityInfo {
+    isEncrypted: boolean;
+    permissions: string[];
+}
 
 const PdfSecurityCheckerPage: React.FC = () => {
-  return (
-    <div className="container mx-auto p-4 md:p-8">
-      <div className="flex items-center gap-4 mb-8">
-        <PdfSecurityCheckerIcon className="w-10 h-10 text-green-500" />
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800">PDF Security Checker</h1>
-      </div>
-      <div className="p-8 md:p-12 border-2 border-dashed border-gray-300 rounded-lg text-center bg-gray-50">
-        <div className="w-16 h-16 mx-auto bg-yellow-100 rounded-full flex items-center justify-center">
-          <LockIcon className="w-8 h-8 text-yellow-500" />
+    const [securityInfo, setSecurityInfo] = useState<SecurityInfo | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file || file.type !== 'application/pdf') return;
+
+        setIsLoading(true);
+        setSecurityInfo(null);
+        setError('');
+        try {
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer, password: '' }).promise;
+            
+            const meta = await pdf.getMetadata();
+            const perms = await pdf.getPermissions();
+
+            const permissionMap = {
+                [pdfjsLib.PermissionFlag.PRINT]: 'Printing',
+                [pdfjsLib.PermissionFlag.MODIFY]: 'Modifying',
+                [pdfjsLib.PermissionFlag.COPY]: 'Copying Text/Graphics',
+                [pdfjsLib.PermissionFlag.ADD_OR_MODIFY]: 'Adding/Modifying Annotations',
+            };
+            
+            const grantedPermissions = perms ? Object.entries(permissionMap)
+                .filter(([flag]) => perms.includes(Number(flag)))
+                .map(([, desc]) => desc) : ['All permissions granted (no restrictions found)'];
+
+            setSecurityInfo({
+                isEncrypted: meta.info.IsEncrypted || false,
+                permissions: grantedPermissions
+            });
+
+        } catch (err: any) {
+            if (err.name === 'PasswordException') {
+                setError('This PDF is password-protected and cannot be opened without a password.');
+            } else {
+                setError('Failed to analyze PDF security.');
+            }
+            console.error(err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    return (
+        <div className="container mx-auto p-4 md:p-8">
+            <div className="flex items-center gap-4 mb-8">
+                <PdfSecurityCheckerIcon className="w-10 h-10 text-green-500" />
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-800">PDF Security Checker</h1>
+            </div>
+             <div className="bg-white p-6 rounded-lg shadow-md border max-w-2xl mx-auto space-y-4">
+                 <input type="file" accept="application/pdf" onChange={handleFileChange} disabled={isLoading} className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100" />
+                {isLoading && <p className="text-center">Analyzing...</p>}
+                {error && <p className="text-red-500 text-center">{error}</p>}
+                {securityInfo && (
+                    <div>
+                        <h3 className="font-bold text-lg">Security Summary:</h3>
+                        <p>Encrypted: <span className={securityInfo.isEncrypted ? 'font-bold text-red-600' : 'font-bold text-green-600'}>{securityInfo.isEncrypted ? 'Yes' : 'No'}</span></p>
+                        <h4 className="font-bold mt-2">Permissions:</h4>
+                        <ul className="list-disc list-inside">
+                            {securityInfo.permissions.length > 0 ? securityInfo.permissions.map((p, i) => <li key={i}>{p}</li>) : <li>No specific permissions found.</li>}
+                        </ul>
+                    </div>
+                )}
+            </div>
         </div>
-        <h2 className="mt-6 text-2xl font-bold text-gray-800">Premium Feature</h2>
-        <p className="mt-2 text-gray-600 max-w-md mx-auto">
-          This tool is a premium feature. Please upgrade your membership to unlock it.
-        </p>
-        <button className="mt-8 px-8 py-3 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition shadow-lg text-lg">
-          Unlock with Premium
-        </button>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default PdfSecurityCheckerPage;

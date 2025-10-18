@@ -1,28 +1,60 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { CurrencyConverterIcon } from '../components/icons/CurrencyConverterIcon';
-import { LockIcon } from '../components/icons/LockIcon';
+
+const staticRates: { [key: string]: number } = {
+    'USD': 1,
+    'EUR': 0.92,
+    'GBP': 0.79,
+    'JPY': 157.0,
+    'AUD': 1.50,
+    'CAD': 1.37,
+    'CHF': 0.90,
+};
 
 const CurrencyConverterPage: React.FC = () => {
-  return (
-    <div className="container mx-auto p-4 md:p-8">
-      <div className="flex items-center gap-4 mb-8">
-        <CurrencyConverterIcon className="w-10 h-10 text-teal-500" />
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Currency Converter</h1>
-      </div>
-      <div className="p-8 md:p-12 border-2 border-dashed border-gray-300 rounded-lg text-center bg-gray-50">
-        <div className="w-16 h-16 mx-auto bg-yellow-100 rounded-full flex items-center justify-center">
-          <LockIcon className="w-8 h-8 text-yellow-500" />
+    const [amount, setAmount] = useState('100');
+    const [fromCurrency, setFromCurrency] = useState('USD');
+    const [toCurrency, setToCurrency] = useState('EUR');
+
+    const convertedAmount = useMemo(() => {
+        const numAmount = parseFloat(amount);
+        if (isNaN(numAmount)) return '...';
+
+        const amountInUsd = numAmount / staticRates[fromCurrency];
+        const result = amountInUsd * staticRates[toCurrency];
+        return result.toFixed(2);
+    }, [amount, fromCurrency, toCurrency]);
+
+    return (
+        <div className="container mx-auto p-4 md:p-8">
+            <div className="flex items-center gap-4 mb-8">
+                <CurrencyConverterIcon className="w-10 h-10 text-teal-500" />
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Currency Converter</h1>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md border max-w-lg mx-auto space-y-4">
+                 <p className="text-xs text-center text-gray-500">Note: Exchange rates are for demonstration purposes and are not live.</p>
+                <div className="grid grid-cols-3 gap-4">
+                    <div className="col-span-2">
+                        <label>Amount</label>
+                        <input type="number" value={amount} onChange={e => setAmount(e.target.value)} className="w-full p-2 border rounded-md mt-1"/>
+                    </div>
+                    <div>
+                         <label>From</label>
+                        <select value={fromCurrency} onChange={e => setFromCurrency(e.target.value)} className="w-full p-2 border rounded-md mt-1">
+                            {Object.keys(staticRates).map(c => <option key={c}>{c}</option>)}
+                        </select>
+                    </div>
+                </div>
+                <div className="text-center pt-4">
+                    <p className="text-lg">Converted Amount</p>
+                    <p className="text-4xl font-bold text-teal-600">{convertedAmount} <span className="text-2xl text-gray-500">{toCurrency}</span></p>
+                    <select value={toCurrency} onChange={e => setToCurrency(e.target.value)} className="p-2 border rounded-md mt-2">
+                         {Object.keys(staticRates).map(c => <option key={c}>{c}</option>)}
+                    </select>
+                </div>
+            </div>
         </div>
-        <h2 className="mt-6 text-2xl font-bold text-gray-800">Premium Feature</h2>
-        <p className="mt-2 text-gray-600 max-w-md mx-auto">
-          The currency converter is a premium feature. Please upgrade your membership to unlock this tool.
-        </p>
-        <button className="mt-8 px-8 py-3 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition shadow-lg text-lg">
-          Unlock with Premium
-        </button>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default CurrencyConverterPage;

@@ -1,13 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { TimeZoneConverterIcon } from '../components/icons/TimeZoneConverterIcon';
 
-const timeZones = [
-  'UTC', 'GMT', 'America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles',
-  'Europe/London', 'Europe/Paris', 'Europe/Berlin', 'Asia/Tokyo', 'Asia/Dubai', 'Australia/Sydney'
-];
+// FIX: The `supportedValuesOf` API is modern and may not be in older TypeScript lib definitions.
+// This causes a compile-time error. Added a try-catch block with a fallback list of 
+// timezones for robustness against both TypeScript errors and older browser environments.
+let timeZones: string[];
+try {
+  // Use the Intl API to get a comprehensive list of IANA time zones supported by the browser.
+  // @ts-ignore - supportedValuesOf might not be in older TS lib versions.
+  timeZones = Intl.supportedValuesOf('timeZone');
+} catch (e) {
+  console.warn("Intl.supportedValuesOf is not supported, using a fallback list of timezones.");
+  // A fallback list of common IANA time zones.
+  const fallbackTimeZones = [
+    'UTC',
+    'GMT',
+    'America/New_York',
+    'America/Los_Angeles',
+    'America/Chicago',
+    'America/Denver',
+    'Europe/London',
+    'Europe/Paris',
+    'Europe/Berlin',
+    'Asia/Tokyo',
+    'Asia/Dubai',
+    'Asia/Kolkata',
+    'Australia/Sydney',
+    'Africa/Cairo',
+    // Ensure the user's current timezone is in the list
+    Intl.DateTimeFormat().resolvedOptions().timeZone,
+  ];
+  // Remove duplicates and sort alphabetically
+  timeZones = [...new Set(fallbackTimeZones)].sort();
+}
 
 const TimeZoneConverterPage: React.FC = () => {
-  const [fromTimeZone, setFromTimeZone] = useState('America/New_York');
+  const [fromTimeZone, setFromTimeZone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone);
   const [toTimeZone, setToTimeZone] = useState('Europe/London');
   const [fromTime, setFromTime] = useState(new Date());
   

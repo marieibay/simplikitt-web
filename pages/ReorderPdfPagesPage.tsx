@@ -1,28 +1,126 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { ReorderPdfPagesIcon } from '../components/icons/ReorderPdfPagesIcon';
-import { LockIcon } from '../components/icons/LockIcon';
+
+declare const pdfjsLib: any;
+declare const PDFLib: any;
+
+interface PagePreview {
+    originalIndex: number;
+    dataUrl: string;
+}
 
 const ReorderPdfPagesPage: React.FC = () => {
-  return (
-    <div className="container mx-auto p-4 md:p-8">
-      <div className="flex items-center gap-4 mb-8">
-        <ReorderPdfPagesIcon className="w-10 h-10 text-green-500" />
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Reorder PDF Pages</h1>
-      </div>
-      <div className="p-8 md:p-12 border-2 border-dashed border-gray-300 rounded-lg text-center bg-gray-50">
-        <div className="w-16 h-16 mx-auto bg-yellow-100 rounded-full flex items-center justify-center">
-          <LockIcon className="w-8 h-8 text-yellow-500" />
+    const [pdfFile, setPdfFile] = useState<File | null>(null);
+    const [pages, setPages] = useState<PagePreview[]>([]);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const dragItem = useRef<number | null>(null);
+    const dragOverItem = useRef<number | null>(null);
+
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        setPdfFile(file);
+        setIsProcessing(true);
+        setPages([]);
+
+        try {
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+            const previews: PagePreview[] = [];
+            for (let i = 1; i <= pdf.numPages; i++) {
+                const page = await pdf.getPage(i);
+                const viewport = page.getViewport({ scale: 0.5 });
+                const canvas = document.createElement('canvas');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                const context = canvas.getContext('2d');
+                if (context) {
+                    await page.render({ canvasContext: context, viewport }).promise;
+                    previews.push({ originalIndex: i - 1, dataUrl: canvas.toDataURL() });
+                }
+            }
+            setPages(previews);
+        } catch (err) {
+            console.error(err);
+            alert("Could not load PDF pages.");
+        } finally {
+            setIsProcessing(false);
+        }
+    };
+
+    const handleDragSort = () => {
+        if (dragItem.current === null || dragOverItem.current === null) return;
+        const newPages = [...pages];
+        const draggedItemContent = newPages.splice(dragItem.current, 1)[0];
+        newPages.splice(dragOverItem.current, 0, draggedItemContent);
+        dragItem.current = null;
+        dragOverItem.current = null;
+        setPages(newPages);
+    };
+    
+    const handleSave = async () => {
+        if (!pdfFile || pages.length === 0) return;
+        setIsProcessing(true);
+        try {
+            const pdfBytes = await pdfFile.arrayBuffer();
+            const originalPdf = await PDFLib.PDFDocument.load(pdfBytes);
+            const newPdf = await PDFLib.PDFDocument.create();
+            
+            const pageIndices = pages.map(p => p.originalIndex);
+            const copiedPages = await newPdf.copyPages(originalPdf, pageIndices);
+            copiedPages.forEach(page => newPdf.addPage(page));
+
+            const newPdfBytes = await newPdf.save();
+            const blob = new Blob([newPdfBytes], { type: 'application/pdf' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `reordered_${pdfFile.name}`;
+            link.click();
+            URL.revokeObjectURL(link.href);
+        } catch (error) {
+            console.error(error);
+            alert('Failed to save reordered PDF.');
+        } finally {
+            setIsProcessing(false);
+        }
+    }
+
+    return (
+        <div className="container mx-auto p-4 md:p-8">
+            <div className="flex items-center gap-4 mb-8">
+                <ReorderPdfPagesIcon className="w-10 h-10 text-green-500" />
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Reorder PDF Pages</h1>
+            </div>
+            
+            {!pdfFile ? (
+                 <input type="file" accept="application/pdf" onChange={handleFileChange} />
+            ) : (
+                <div className="space-y-4">
+                     <p className="text-center text-gray-600">Drag and drop the pages to change their order.</p>
+                     <div className="p-4 bg-gray-100 rounded-lg grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 min-h-[200px]">
+                        {isProcessing && !pages.length && <p>Loading pages...</p>}
+                        {pages.map((page, index) => (
+                             <div 
+                                key={page.originalIndex}
+                                className="text-center p-2 bg-white rounded shadow cursor-grab active:cursor-grabbing"
+                                draggable
+                                onDragStart={() => dragItem.current = index}
+                                onDragEnter={() => dragOverItem.current = index}
+                                onDragEnd={handleDragSort}
+                                onDragOver={(e) => e.preventDefault()}
+                             >
+                                 <img src={page.dataUrl} alt={`Page ${page.originalIndex + 1}`} className="w-full h-auto border"/>
+                                 <p className="mt-1 text-sm font-semibold">{index + 1}</p>
+                             </div>
+                        ))}
+                    </div>
+                     <button onClick={handleSave} disabled={isProcessing} className="w-full max-w-md mx-auto block py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 disabled:opacity-50">
+                        {isProcessing ? 'Saving...' : 'Save Reordered PDF'}
+                     </button>
+                </div>
+            )}
         </div>
-        <h2 className="mt-6 text-2xl font-bold text-gray-800">Premium Feature</h2>
-        <p className="mt-2 text-gray-600 max-w-md mx-auto">
-          This tool is a premium feature. Please upgrade your membership to unlock it.
-        </p>
-        <button className="mt-8 px-8 py-3 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition shadow-lg text-lg">
-          Unlock with Premium
-        </button>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default ReorderPdfPagesPage;

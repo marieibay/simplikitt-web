@@ -1,26 +1,48 @@
-
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { HexadecimalCalculatorIcon } from '../components/icons/HexadecimalCalculatorIcon';
-import { LockIcon } from '../components/icons/LockIcon';
 
 const HexadecimalCalculatorPage: React.FC = () => {
+  const [val1, setVal1] = useState('A'); // 10
+  const [val2, setVal2] = useState('5'); // 5
+  const [operation, setOperation] = useState<'add' | 'subtract'>('add');
+
+  const result = useMemo(() => {
+    try {
+      const num1 = parseInt(val1, 16);
+      const num2 = parseInt(val2, 16);
+      if (isNaN(num1) || isNaN(num2)) return 'Invalid Input';
+
+      let resDecimal;
+      if (operation === 'add') {
+        resDecimal = num1 + num2;
+      } else {
+        resDecimal = num1 - num2;
+      }
+      return resDecimal.toString(16).toUpperCase();
+    } catch {
+      return 'Error';
+    }
+  }, [val1, val2, operation]);
+
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
         <HexadecimalCalculatorIcon className="w-10 h-10 text-teal-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Hexadecimal Calculator</h1>
       </div>
-      <div className="p-8 md:p-12 border-2 border-dashed border-gray-300 rounded-lg text-center bg-gray-50">
-        <div className="w-16 h-16 mx-auto bg-yellow-100 rounded-full flex items-center justify-center">
-          <LockIcon className="w-8 h-8 text-yellow-500" />
+      <div className="bg-white p-6 rounded-lg shadow-md border max-w-lg mx-auto space-y-4 font-mono">
+        <input type="text" value={val1} onChange={e => setVal1(e.target.value.replace(/[^0-9a-fA-F]/g, ''))} className="w-full p-2 border rounded-md text-right"/>
+        <div className="flex items-center gap-4">
+          <select value={operation} onChange={e => setOperation(e.target.value as any)} className="p-2 border rounded-md">
+            <option value="add">+</option>
+            <option value="subtract">-</option>
+          </select>
+          <input type="text" value={val2} onChange={e => setVal2(e.target.value.replace(/[^0-9a-fA-F]/g, ''))} className="w-full p-2 border rounded-md text-right"/>
         </div>
-        <h2 className="mt-6 text-2xl font-bold text-gray-800">Premium Feature</h2>
-        <p className="mt-2 text-gray-600 max-w-md mx-auto">
-          The hexadecimal calculator is a premium feature. Please upgrade your membership to unlock this tool.
-        </p>
-        <button className="mt-8 px-8 py-3 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition shadow-lg text-lg">
-          Unlock with Premium
-        </button>
+        <hr/>
+        <div className="p-2 bg-gray-100 rounded-md text-right">
+          <p className="text-2xl font-bold">{result}</p>
+        </div>
       </div>
     </div>
   );

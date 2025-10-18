@@ -1,28 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PdfFileSizeCheckerIcon } from '../components/icons/PdfFileSizeCheckerIcon';
-import { LockIcon } from '../components/icons/LockIcon';
+
+const formatBytes = (bytes: number, decimals = 2) => {
+  if (bytes === 0) return '0 Bytes';
+  const k = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
 
 const PdfFileSizeCheckerPage: React.FC = () => {
-  return (
-    <div className="container mx-auto p-4 md:p-8">
-      <div className="flex items-center gap-4 mb-8">
-        <PdfFileSizeCheckerIcon className="w-10 h-10 text-green-500" />
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800">PDF File Size Checker</h1>
-      </div>
-      <div className="p-8 md:p-12 border-2 border-dashed border-gray-300 rounded-lg text-center bg-gray-50">
-        <div className="w-16 h-16 mx-auto bg-yellow-100 rounded-full flex items-center justify-center">
-          <LockIcon className="w-8 h-8 text-yellow-500" />
+    const [file, setFile] = useState<File | null>(null);
+
+    return (
+        <div className="container mx-auto p-4 md:p-8">
+            <div className="flex items-center gap-4 mb-8">
+                <PdfFileSizeCheckerIcon className="w-10 h-10 text-green-500" />
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-800">PDF File Size Checker</h1>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md border max-w-lg mx-auto text-center space-y-4">
+                 <input type="file" accept="application/pdf" onChange={e => setFile(e.target.files?.[0] || null)} className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100" />
+                 {file && (
+                     <div className="pt-4">
+                        <p className="text-gray-600">{file.name}</p>
+                        <p className="text-6xl font-bold my-2">{formatBytes(file.size)}</p>
+                    </div>
+                 )}
+            </div>
         </div>
-        <h2 className="mt-6 text-2xl font-bold text-gray-800">Premium Feature</h2>
-        <p className="mt-2 text-gray-600 max-w-md mx-auto">
-          This tool is a premium feature. Please upgrade your membership to unlock it.
-        </p>
-        <button className="mt-8 px-8 py-3 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition shadow-lg text-lg">
-          Unlock with Premium
-        </button>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default PdfFileSizeCheckerPage;
