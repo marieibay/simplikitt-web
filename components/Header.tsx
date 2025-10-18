@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SimpliKittLogo } from '../assets/SimpliKittLogo';
@@ -29,10 +30,18 @@ export const Header: React.FC = () => {
   }, {});
 
   const handleBackClick = () => {
-    navigate(-1); // Use standard browser back behavior
+    const currentTool = TOOLS.find(tool => tool.path === location.pathname);
+
+    if (currentTool) {
+      // If on a tool page, go up to its category page.
+      navigate(`/category/${slugify(currentTool.category)}`);
+    } else {
+      // From any other page (category, /tools, /about, etc.), go to the homepage.
+      navigate('/');
+    }
   };
 
-  const showBackButton = !['/', '/tools'].includes(location.pathname);
+  const showBackButton = location.pathname !== '/';
 
   return (
     <header className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-200">
