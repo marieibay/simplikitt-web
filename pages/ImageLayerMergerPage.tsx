@@ -34,7 +34,6 @@ const ImageLayerMergerPage: React.FC = () => {
             image2.src = img2;
             image2.onload = () => {
                 ctx.drawImage(image1, 0, 0);
-                // FIX: Cast blendMode to GlobalCompositeOperation to satisfy TypeScript.
                 ctx.globalCompositeOperation = blendMode as GlobalCompositeOperation;
                  ctx.drawImage(image2, 0, 0, image1.width, image1.height);
                  ctx.globalCompositeOperation = 'source-over'; // reset

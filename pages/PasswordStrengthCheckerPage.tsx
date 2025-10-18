@@ -23,7 +23,7 @@ const PasswordStrengthCheckerPage: React.FC = () => {
       { text: 'Very Strong', color: 'bg-green-500' },
     ];
     
-    return levels[Math.min(score, 4)];
+    return levels[Math.min(score, levels.length - 1)];
   }, [password]);
 
   return (

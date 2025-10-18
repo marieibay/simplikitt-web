@@ -23,7 +23,6 @@ const TextToAsciiArtViewerPage: React.FC = () => {
         <TextToAsciiArtViewerIcon className="w-10 h-10 text-lime-600" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Text to ASCII Art Viewer</h1>
       </div>
-      {/* FIX: Corrected TailwindCSS class from md-grid-cols-2 to md:grid-cols-2 */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <textarea 
           value={input} 

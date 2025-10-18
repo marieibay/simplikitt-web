@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { CsvColumnSelectorIcon } from '../components/icons/CsvColumnSelectorIcon';
 import { LockIcon } from '../components/icons/LockIcon';
@@ -16,7 +15,7 @@ const CsvColumnSelectorPage: React.FC = () => {
         </div>
         <h2 className="mt-6 text-2xl font-bold text-gray-800">Premium Feature</h2>
         <p className="mt-2 text-gray-600 max-w-md mx-auto">
-          Selecting specific columns from a CSV file is a premium feature. Please upgrade your membership to unlock this tool.
+          Extracting specific columns from a CSV file is a premium feature. Please upgrade your membership to unlock this tool.
         </p>
         <button className="mt-8 px-8 py-3 bg-yellow-500 text-white font-bold rounded-lg hover:bg-yellow-600 transition shadow-lg text-lg">
           Unlock with Premium
