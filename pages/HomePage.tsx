@@ -26,6 +26,12 @@ const categoryIcons: { [key: string]: React.FC<any> } = {
 
 const HomePage: React.FC = () => {
   const popularTools = TOOLS.filter(tool => POPULAR_PATHS.includes(tool.path));
+  
+  const toolCounts = TOOLS.reduce((acc, tool) => {
+    acc[tool.category] = (acc[tool.category] || 0) + 1;
+    return acc;
+  }, {} as { [key: string]: number });
+
 
   return (
     <>
@@ -46,6 +52,7 @@ const HomePage: React.FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
               {allCategories.map(name => {
                 const details = categoryDetails[name as keyof typeof categoryDetails];
+                const count = toolCounts[name] || 0;
                 return (
                   <CategoryCard 
                     key={name}
@@ -54,6 +61,7 @@ const HomePage: React.FC = () => {
                     Icon={details.Icon}
                     colorName={details.colorName}
                     to={`/category/${slugify(name)}`}
+                    toolCount={count}
                   />
                 );
               })}
