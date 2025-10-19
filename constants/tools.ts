@@ -230,6 +230,7 @@ import ImageZoomPreviewerPage from '../pages/ImageZoomPreviewerPage';
 import ImageHeaderInfoViewerPage from '../pages/ImageHeaderInfoViewerPage';
 import ImageHistogramViewerPage from '../pages/ImageHistogramViewerPage';
 import ImageColorPaletteSaverPage from '../pages/ImageColorPaletteSaverPage';
+import PngToSvgPage from '../pages/PngToSvgPage';
 import FindAndReplacePage from '../pages/FindAndReplacePage';
 import LineBreakRemoverPage from '../pages/LineBreakRemoverPage';
 import TextToSlugConverterPage from '../pages/TextToSlugConverterPage';
@@ -468,6 +469,7 @@ export const TOOLS: Tool[] = [
   { name: 'Image to Grayscale', description: 'Convert multiple images to grayscale.', path: '/image-to-grayscale', Icon: ImageOff, Page: ImageToGrayscalePage, category: 'Image Tools', borderColor: 'border-gray-500' },
   { name: 'Bulk JPG to PNG', description: 'Convert multiple JPGs to PNGs.', path: '/bulk-jpg-to-png', Icon: FlipHorizontal, Page: BulkJpgToPngPage, category: 'Image Tools', borderColor: 'border-yellow-500' },
   { name: 'Bulk PNG to JPG', description: 'Convert multiple PNGs to JPGs.', path: '/bulk-png-to-jpg', Icon: FlipHorizontal, Page: BulkPngToJpgPage, category: 'Image Tools', borderColor: 'border-yellow-500' },
+  { name: 'PNG to SVG Converter', description: 'Embed a PNG image inside an SVG file.', path: '/png-to-svg', Icon: Replace, Page: PngToSvgPage, category: 'Image Tools', borderColor: 'border-orange-400' },
   { name: 'Image Cropper', description: 'Crop images with various aspect ratios.', path: '/image-cropper', Icon: Crop, Page: ImageCropperPage, category: 'Image Tools', borderColor: 'border-rose-500' },
   { name: 'Image Watermark', description: 'Add a watermark to your images.', path: '/image-watermark', Icon: Droplets, Page: ImageWatermarkPage, category: 'Image Tools', borderColor: 'border-rose-400' },
   { name: 'Image Rotator', description: 'Rotate an image to any angle.', path: '/image-rotator', Icon: RotateCw, Page: ImageRotatorPage, category: 'Image Tools', borderColor: 'border-fuchsia-500' },
