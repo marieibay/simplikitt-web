@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { PdfDocumentCropperIcon } from '../components/icons/PdfDocumentCropperIcon';
 import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
@@ -106,9 +107,10 @@ const PdfDocumentCropperPage: React.FC = () => {
                         {imgSrc && (
                              <ReactCrop
                                 crop={crop}
-                                onChange={c => setCrop(c)}
+                                // FIX: The `onChange` handler for `react-image-crop` now provides the percentage crop as the second argument.
+                                // The `unit` prop is also no longer valid.
+                                onChange={(_, percentCrop) => setCrop(percentCrop)}
                                 aspect={undefined}
-                                unit="%"
                             >
                                 <img ref={imgRef} src={imgSrc} onLoad={onImageLoad} alt="Crop preview" style={{ maxHeight: '60vh' }} />
                             </ReactCrop>

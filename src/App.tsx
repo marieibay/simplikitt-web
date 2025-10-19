@@ -8,6 +8,7 @@ import HomePage from '@/pages/HomePage';
 import AllToolsPage from '@/pages/AllToolsPage';
 import CategoryPage from '@/pages/CategoryPage';
 
+
 // Configure the PDF.js worker, this is critical for all PDF tools.
 import * as pdfjsLib from 'pdfjs-dist';
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://aistudiocdn.com/pdfjs-dist@5.4.296/build/pdf.worker.mjs`;
@@ -18,15 +19,18 @@ const InitialPageHandler: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
+    // This effect ensures that on the very first load of a session (e.g., new tab),
+    // the user is always directed to the homepage, regardless of the URL hash.
+    // Subsequent reloads within the same tab session will behave normally.
     if (!sessionStorage.getItem('simpliKittSessionStarted')) {
       sessionStorage.setItem('simpliKittSessionStarted', 'true');
       if (location.pathname !== '/') {
         navigate('/', { replace: true });
       }
     }
-  }, [navigate, location.pathname]);
+  }, [navigate, location.pathname]); // Dependencies ensure hooks are correctly used.
 
-  return null;
+  return null; // This component does not render anything.
 };
 
 

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SimpliKittLogo } from '../assets/SimpliKittLogo';
@@ -32,38 +31,6 @@ export const Footer: React.FC = () => {
                   </Link>
                 </li>
               ))}
-            </ul>
-          </div>
-
-          <div className="col-span-1 lg:col-span-1">
-            <h3 className="font-semibold text-gray-800 mb-3">Company</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/about" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div className="col-span-2 lg:col-span-2">
-            <h3 className="font-semibold text-gray-800 mb-3">Legal</h3>
-             <ul className="space-y-2">
-              <li>
-                <Link to="/privacy-policy" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms-of-service" className="text-gray-600 hover:text-blue-600 transition-colors">
-                  Terms of Service
-                </Link>
-              </li>
             </ul>
           </div>
         </div>

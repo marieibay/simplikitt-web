@@ -29,8 +29,10 @@ const PdfToImagePage: React.FC<PdfToImagePageProps> = ({ Icon, title, color, out
           canvas.height = viewport.height;
           const context = canvas.getContext('2d');
           if (context) {
-            // FIX: The `page.render` method in this version of pdf.js returns a promise directly. The `.promise` was removed.
-            await page.render({ canvasContext: context, viewport });
+            // FIX: The `page.render` method signature has been updated.
+            // It now returns a promise directly and the `.promise` property has been removed.
+            // The type definitions also indicate a 'canvas' property is required.
+            await page.render({ canvasContext: context, viewport, canvas });
             imageUrls.push(canvas.toDataURL(`image/${outputFormat}`));
           }
         }

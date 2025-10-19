@@ -1,13 +1,14 @@
 import React, { useState, useRef } from 'react';
-import { Crop } from 'lucide-react';
-import ReactCrop, { type Crop as T_Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
-import * as pdfjsLib from 'pdfjs-dist';
-import * as PDFLib from 'pdf-lib';
+import { PdfDocumentCropperIcon } from '../components/icons/PdfDocumentCropperIcon';
+import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
+
+declare const pdfjsLib: any;
+declare const PDFLib: any;
 
 const PdfDocumentCropperPage: React.FC = () => {
     const [pdfFile, setPdfFile] = useState<File | null>(null);
     const [imgSrc, setImgSrc] = useState('');
-    const [crop, setCrop] = useState<T_Crop>();
+    const [crop, setCrop] = useState<Crop>();
     const [isProcessing, setIsProcessing] = useState(false);
     const [originalPdfDims, setOriginalPdfDims] = useState<{ width: number, height: number } | null>(null);
     const imgRef = useRef<HTMLImageElement>(null);
@@ -30,8 +31,7 @@ const PdfDocumentCropperPage: React.FC = () => {
             canvas.height = viewport.height;
             const context = canvas.getContext('2d');
             if (context) {
-                // FIX: The `page.render` method in this version of pdf.js returns a promise directly. The `.promise` was removed.
-                await page.render({ canvasContext: context, viewport });
+                await page.render({ canvasContext: context, viewport }).promise;
                 setImgSrc(canvas.toDataURL('image/png'));
             }
             setIsProcessing(false);
@@ -89,7 +89,7 @@ const PdfDocumentCropperPage: React.FC = () => {
     return (
         <div className="container mx-auto p-4 md:p-8">
             <div className="flex items-center gap-4 mb-8">
-                <Crop className="w-10 h-10 text-green-500" />
+                <PdfDocumentCropperIcon className="w-10 h-10 text-green-500" />
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Crop PDF Document</h1>
             </div>
 
