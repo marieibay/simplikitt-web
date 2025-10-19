@@ -1,5 +1,7 @@
+
+
 import React, { useState, useRef } from 'react';
-import { PdfDocumentCropperIcon } from '../components/icons/PdfDocumentCropperIcon';
+import { Crop as PdfDocumentCropperIcon } from 'lucide-react';
 import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
 
 declare const pdfjsLib: any;
@@ -31,7 +33,7 @@ const PdfDocumentCropperPage: React.FC = () => {
             canvas.height = viewport.height;
             const context = canvas.getContext('2d');
             if (context) {
-                await page.render({ canvasContext: context, viewport }).promise;
+                await page.render({ canvasContext: context, viewport });
                 setImgSrc(canvas.toDataURL('image/png'));
             }
             setIsProcessing(false);
@@ -55,7 +57,7 @@ const PdfDocumentCropperPage: React.FC = () => {
             const cropWidth = (crop.width / 100) * originalWidth;
             const cropHeight = (crop.height / 100) * originalHeight;
 
-            pages.forEach(page => {
+            pages.forEach((page: any) => {
                 // pdf-lib's crop box is relative to the page's original bottom-left corner
                 page.setCropBox(x, originalHeight - y - cropHeight, cropWidth, cropHeight);
             });

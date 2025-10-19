@@ -34,10 +34,8 @@ const ReorderPdfPagesPage: React.FC = () => {
                 canvas.height = viewport.height;
                 const context = canvas.getContext('2d');
                 if (context) {
-                    // FIX: The `page.render` method signature has been updated.
-                    // It now returns a promise directly and the `.promise` property has been removed.
-                    // The type definitions also indicate a 'canvas' property is required.
-                    await page.render({ canvasContext: context, viewport, canvas });
+                    // FIX: The render method in this version of pdfjs-dist expects the canvas element.
+                    await page.render({ canvas, viewport }).promise;
                     previews.push({ originalIndex: i - 1, dataUrl: canvas.toDataURL() });
                 }
             }
@@ -71,7 +69,7 @@ const ReorderPdfPagesPage: React.FC = () => {
             const pageIndices = pages.map(p => p.originalIndex);
             const copiedPages = await newPdf.copyPages(originalPdf, pageIndices);
             copiedPages.forEach(page => newPdf.addPage(page));
-
+    
             const newPdfBytes = await newPdf.save();
             const blob = new Blob([newPdfBytes as any], { type: 'application/pdf' });
             const link = document.createElement('a');
