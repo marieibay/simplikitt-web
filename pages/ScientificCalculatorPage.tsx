@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScientificCalculatorIcon } from '../components/icons/ScientificCalculatorIcon';
+import { Key, RefreshCw } from 'lucide-react';
 
 const ScientificCalculatorPage: React.FC = () => {
   const [display, setDisplay] = useState('');
@@ -52,7 +52,8 @@ const ScientificCalculatorPage: React.FC = () => {
       '√', '^', 'log', 'ln',
   ];
 
-  const Button = ({ value, className = '' }: { value: string, className?: string }) => {
+  // FIX: Using `any` for props to avoid type errors with the `key` prop when this component is used in a map.
+  const Button = ({ value, className = '' }: any) => {
     const action = value === '=' ? calculate : (value === 'C' ? clear : () => handleClick(value));
     return (
         <button onClick={action} className={`p-4 rounded-lg text-xl font-semibold transition ${className}`}>
@@ -64,7 +65,7 @@ const ScientificCalculatorPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <ScientificCalculatorIcon className="w-10 h-10 text-teal-500" />
+        <Key className="w-10 h-10 text-teal-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Scientific Calculator</h1>
       </div>
       <div className="bg-white p-6 rounded-lg shadow-xl border max-w-md mx-auto">

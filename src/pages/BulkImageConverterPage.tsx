@@ -17,7 +17,8 @@ export const BulkImageConverterPage: React.FC<BulkImageConverterPageProps> = ({ 
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setFiles(Array.from(e.target.files).filter(file => file.type === `image/${fromFormat}`));
+      // FIX: Explicitly type 'file' as File to resolve 'type' property error.
+      setFiles(Array.from(e.target.files).filter((file: File) => file.type === `image/${fromFormat}`));
     }
   };
 

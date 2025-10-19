@@ -15,7 +15,8 @@ const ImageToBase64Page: React.FC = () => {
       setIsProcessing(true);
       const files = Array.from(e.target.files);
       const newResults: Result[] = [];
-      for (const file of files) {
+      // FIX: Cast file to File to access its properties like 'name' and use it in readAsDataURL.
+      for (const file of files as File[]) {
         const dataUrl = await new Promise<string>(resolve => {
           const reader = new FileReader();
           reader.onload = e => resolve(e.target?.result as string);
