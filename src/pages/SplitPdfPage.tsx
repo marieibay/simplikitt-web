@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { SplitPdfIcon } from '../components/icons/SplitPdfIcon';
 
@@ -21,16 +22,24 @@ const SplitPdfPage: React.FC = () => {
     try {
       const arrayBuffer = await file.arrayBuffer();
       const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
+      // FIX: Robustly parse page ranges and ensure flatMap callback always returns an array.
       const pageIndices = range.split(',').flatMap(r => {
-        if (r.includes('-')) {
-          const [start, end] = r.split('-').map(Number);
-          return Array.from({ length: end - start + 1 }, (_, i) => start + i - 1);
+        const trimmed = r.trim();
+        if (trimmed.includes('-')) {
+            const parts = trimmed.split('-').map(s => parseInt(s, 10));
+            if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) && parts[0] <= parts[1]) {
+                const [start, end] = parts;
+                return Array.from({ length: end - start + 1 }, (_, i) => start + i - 1);
+            }
+            return [];
         }
-        return Number(r) - 1;
+        const num = parseInt(trimmed, 10);
+        return !isNaN(num) ? [num - 1] : [];
       }).filter(i => i >= 0 && i < pdf.getPageCount());
 
       if (pageIndices.length === 0) {
         alert('Invalid page range.');
+        setIsSplitting(false);
         return;
       }
 

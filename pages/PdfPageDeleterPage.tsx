@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { PdfPageDeleterIcon } from '../components/icons/PdfPageDeleterIcon';
 
@@ -23,16 +24,22 @@ const PdfPageDeleterPage: React.FC = () => {
             });
             
             const pageCount = pdfDoc.getPageCount();
+            // FIX: Robustly parse page ranges and ensure flatMap callback always returns an array.
             const indicesToDelete = pagesToDelete.split(',')
                 .flatMap(r => {
                     const trimmed = r.trim();
                     if (trimmed.includes('-')) {
-                        const [start, end] = trimmed.split('-').map(Number);
-                        return Array.from({ length: end - start + 1 }, (_, i) => start + i - 1);
+                        const parts = trimmed.split('-').map(s => parseInt(s, 10));
+                        if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) && parts[0] <= parts[1]) {
+                            const [start, end] = parts;
+                            return Array.from({ length: end - start + 1 }, (_, i) => start + i - 1);
+                        }
+                        return [];
                     }
-                    return Number(trimmed) - 1;
+                    const num = parseInt(trimmed, 10);
+                    return !isNaN(num) ? [num - 1] : [];
                 })
-                .filter(i => !isNaN(i) && i >= 0 && i < pageCount);
+                .filter(i => i >= 0 && i < pageCount);
 
             const uniqueIndices = [...new Set(indicesToDelete)].sort((a, b) => b - a); // Sort descending to avoid index shifting issues
 

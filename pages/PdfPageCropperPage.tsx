@@ -1,3 +1,5 @@
+
+import React from 'react';
 import PdfDocumentCropperPage from './PdfDocumentCropperPage';
 
 // This tool uses the same logic as the document cropper.

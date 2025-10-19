@@ -1,7 +1,7 @@
+
 import React, { useState } from 'react';
 import { PdfPageDeleterIcon } from '../components/icons/PdfPageDeleterIcon';
-
-declare const PDFLib: any;
+import { PDFDocument } from 'pdf-lib';
 
 const PdfPageDeleterPage: React.FC = () => {
     const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -16,14 +16,13 @@ const PdfPageDeleterPage: React.FC = () => {
         setIsProcessing(true);
 
         try {
-            const { PDFDocument } = PDFLib;
             const pdfBytes = await pdfFile.arrayBuffer();
             const pdfDoc = await PDFDocument.load(pdfBytes, {
                 ignoreEncryption: true,
             });
             
             const pageCount = pdfDoc.getPageCount();
-            // FIX: Robustly parse range to prevent errors with invalid characters or formats, and ensure flatMap receives an array.
+            // FIX: Robustly parse page ranges and ensure flatMap callback always returns an array.
             const indicesToDelete = pagesToDelete.split(',')
                 .flatMap(r => {
                     const trimmed = r.trim();
@@ -38,7 +37,7 @@ const PdfPageDeleterPage: React.FC = () => {
                     const num = parseInt(trimmed, 10);
                     return !isNaN(num) ? [num - 1] : [];
                 })
-                .filter(i => !isNaN(i) && i >= 0 && i < pageCount);
+                .filter(i => i >= 0 && i < pageCount);
 
             const uniqueIndices = [...new Set(indicesToDelete)].sort((a, b) => b - a); // Sort descending to avoid index shifting issues
 
