@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ImageToGrayscaleIcon } from '../components/icons/ImageToGrayscaleIcon';
-
-declare const JSZip: any;
+import JSZip from 'jszip';
 
 const ImageToGrayscalePage: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);

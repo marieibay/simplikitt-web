@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BoxSelect } from 'lucide-react';
-
-declare const JSZip: any;
+import JSZip from 'jszip';
 
 const BulkImageResizerPage: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);

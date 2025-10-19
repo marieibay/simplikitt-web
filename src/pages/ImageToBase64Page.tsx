@@ -13,9 +13,9 @@ const ImageToBase64Page: React.FC = () => {
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setIsProcessing(true);
-      const files = Array.from(e.target.files);
+      const files: File[] = Array.from(e.target.files);
       const newResults: Result[] = [];
-      for (const file of files as File[]) {
+      for (const file of files) {
         const dataUrl = await new Promise<string>(resolve => {
           const reader = new FileReader();
           reader.onload = e => resolve(e.target?.result as string);

@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { Key, RefreshCw } from 'lucide-react';
+import { Key } from 'lucide-react';
+
+interface ButtonProps {
+  value: string;
+  className?: string;
+}
 
 const ScientificCalculatorPage: React.FC = () => {
   const [display, setDisplay] = useState('');
@@ -52,8 +57,7 @@ const ScientificCalculatorPage: React.FC = () => {
       '√', '^', 'log', 'ln',
   ];
 
-  // FIX: Using `any` for props to avoid type errors with the `key` prop when this component is used in a map.
-  const Button = ({ value, className = '' }: any) => {
+  const Button: React.FC<ButtonProps> = ({ value, className = '' }) => {
     const action = value === '=' ? calculate : (value === 'C' ? clear : () => handleClick(value));
     return (
         <button onClick={action} className={`p-4 rounded-lg text-xl font-semibold transition ${className}`}>

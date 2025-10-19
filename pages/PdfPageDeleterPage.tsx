@@ -1,8 +1,7 @@
 
 import React, { useState } from 'react';
 import { PdfPageDeleterIcon } from '../components/icons/PdfPageDeleterIcon';
-
-declare const PDFLib: any;
+import { PDFDocument } from 'pdf-lib';
 
 const PdfPageDeleterPage: React.FC = () => {
     const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -17,14 +16,12 @@ const PdfPageDeleterPage: React.FC = () => {
         setIsProcessing(true);
 
         try {
-            const { PDFDocument } = PDFLib;
             const pdfBytes = await pdfFile.arrayBuffer();
             const pdfDoc = await PDFDocument.load(pdfBytes, {
                 ignoreEncryption: true,
             });
             
             const pageCount = pdfDoc.getPageCount();
-            // FIX: Robustly parse page ranges and ensure flatMap callback always returns an array.
             const indicesToDelete = pagesToDelete.split(',')
                 .flatMap(r => {
                     const trimmed = r.trim();
