@@ -1,9 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { PdfDocumentCropperIcon } from '../components/icons/PdfDocumentCropperIcon';
 import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
-
-declare const pdfjsLib: any;
-declare const PDFLib: any;
+import * as pdfjsLib from 'pdfjs-dist';
+import * as PDFLib from 'pdf-lib';
 
 const PdfDocumentCropperPage: React.FC = () => {
     const [pdfFile, setPdfFile] = useState<File | null>(null);

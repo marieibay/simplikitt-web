@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PdfMetadataViewerIcon } from '../components/icons/PdfMetadataViewerIcon';
-
-declare const pdfjsLib: any;
+import * as pdfjsLib from 'pdfjs-dist';
 
 interface Metadata { [key: string]: any; }
 

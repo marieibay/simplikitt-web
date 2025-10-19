@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { PdfTextReplacerIcon } from '../components/icons/PdfTextReplacerIcon';
-
-declare const pdfjsLib: any;
-declare const PDFLib: any;
+import * as pdfjsLib from 'pdfjs-dist';
+import * as PDFLib from 'pdf-lib';
 
 const PdfTextReplacerPage: React.FC = () => {
     const [file, setFile] = useState<File | null>(null);

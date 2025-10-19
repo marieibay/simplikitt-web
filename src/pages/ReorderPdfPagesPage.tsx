@@ -1,8 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { ReorderPdfPagesIcon } from '../components/icons/ReorderPdfPagesIcon';
-
-declare const pdfjsLib: any;
-declare const PDFLib: any;
+import * as pdfjsLib from 'pdfjs-dist';
+import * as PDFLib from 'pdf-lib';
 
 interface PagePreview {
     originalIndex: number;

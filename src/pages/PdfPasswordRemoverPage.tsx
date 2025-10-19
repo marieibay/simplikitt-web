@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PdfPasswordRemoverIcon } from '../components/icons/PdfPasswordRemoverIcon';
-
-declare const PDFLib: any;
+import * as PDFLib from 'pdf-lib';
 
 const PdfPasswordRemoverPage: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);

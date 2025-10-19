@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BatchFileRenamerIcon } from '../components/icons/BatchFileRenamerIcon';
-
-declare const JSZip: any;
+import JSZip from 'jszip';
 
 const BatchFileRenamerPage: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);

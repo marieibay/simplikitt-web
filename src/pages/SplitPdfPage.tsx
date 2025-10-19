@@ -1,8 +1,7 @@
 
 import React, { useState } from 'react';
 import { SplitPdfIcon } from '../components/icons/SplitPdfIcon';
-
-declare const PDFLib: any;
+import { PDFDocument } from 'pdf-lib';
 
 const SplitPdfPage: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -21,8 +20,7 @@ const SplitPdfPage: React.FC = () => {
     setIsSplitting(true);
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
-      // FIX: Robustly parse page ranges and ensure flatMap callback always returns an array.
+      const pdf = await PDFDocument.load(arrayBuffer);
       const pageIndices = range.split(',').flatMap(r => {
         const trimmed = r.trim();
         if (trimmed.includes('-')) {
@@ -43,7 +41,7 @@ const SplitPdfPage: React.FC = () => {
         return;
       }
 
-      const newPdf = await PDFLib.PDFDocument.create();
+      const newPdf = await PDFDocument.create();
       const copiedPages = await newPdf.copyPages(pdf, pageIndices);
       copiedPages.forEach(page => newPdf.addPage(page));
       

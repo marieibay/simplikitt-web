@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { MergePdfIcon } from '../components/icons/MergePdfIcon';
-
-declare const PDFLib: any;
+import * as PDFLib from 'pdf-lib';
 
 const MergePdfPage: React.FC = () => {
   const [files, setFiles] = useState<File[]>([]);

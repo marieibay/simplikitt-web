@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { PdfViewerIcon } from '../components/icons/PdfViewerIcon';
-
-declare const pdfjsLib: any;
+import * as pdfjsLib from 'pdfjs-dist';
 
 const PdfViewerPage: React.FC = () => {
     const [file, setFile] = useState<File | null>(null);

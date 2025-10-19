@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PptxToTextExtractorIcon } from '../components/icons/PptxToTextExtractorIcon';
-
-declare const JSZip: any;
+import JSZip from 'jszip';
 
 const PptxToTextExtractorPage: React.FC = () => {
   const [text, setText] = useState('');

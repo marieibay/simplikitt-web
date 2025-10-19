@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { Key } from 'lucide-react';
 
+interface ButtonProps {
+  value: string;
+  className?: string;
+  onClick: () => void;
+}
+
 const ScientificCalculatorPage: React.FC = () => {
   const [display, setDisplay] = useState('');
 
@@ -52,7 +58,7 @@ const ScientificCalculatorPage: React.FC = () => {
       '√', '^', 'log', 'ln',
   ];
 
-  const Button = ({ value, className = '' }: any) => {
+  const Button: React.FC<Pick<ButtonProps, 'value' | 'className'>> = ({ value, className = '' }) => {
     const action = value === '=' ? calculate : (value === 'C' ? clear : () => handleClick(value));
     return (
         <button onClick={action} className={`p-4 rounded-lg text-xl font-semibold transition ${className}`}>

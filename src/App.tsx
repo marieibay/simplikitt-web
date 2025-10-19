@@ -14,9 +14,7 @@ import AboutPage from './pages/AboutPage';
 
 // Configure the PDF.js worker, this is critical for all PDF tools.
 import * as pdfjsLib from 'pdfjs-dist';
-// @ts-ignore
-import PdfjsWorker from 'pdfjs-dist/build/pdf.worker.mjs?url';
-pdfjsLib.GlobalWorkerOptions.workerSrc = PdfjsWorker;
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://aistudiocdn.com/pdfjs-dist@5.4.296/build/pdf.worker.mjs`;
 
 
 const InitialPageHandler: React.FC = () => {

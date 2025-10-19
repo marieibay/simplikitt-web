@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PdfSecurityCheckerIcon } from '../components/icons/PdfSecurityCheckerIcon';
-
-declare const pdfjsLib: any;
+import * as pdfjsLib from 'pdfjs-dist';
 
 interface SecurityInfo {
     isEncrypted: boolean;

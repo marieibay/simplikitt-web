@@ -28,7 +28,9 @@ const PdfPageDeleterPage: React.FC = () => {
                     if (trimmed.includes('-')) {
                         const parts = trimmed.split('-').map(s => parseInt(s, 10));
                         if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) && parts[0] <= parts[1]) {
-                            const [start, end] = parts;
+                            // FIX: Destructuring was causing a type inference issue with the arithmetic operations below.
+                            const start = parts[0];
+                            const end = parts[1];
                             return Array.from({ length: end - start + 1 }, (_, i) => start + i - 1);
                         }
                         return [];

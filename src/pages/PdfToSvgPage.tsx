@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { PdfToSvgIcon } from '../components/icons/PdfToSvgIcon';
-
-declare const pdfjsLib: any;
-declare const JSZip: any;
+import * as pdfjsLib from 'pdfjs-dist';
+import JSZip from 'jszip';
 
 const PdfToSvgPage: React.FC = () => {
     const [isProcessing, setIsProcessing] = useState(false);
@@ -41,7 +40,8 @@ const PdfToSvgPage: React.FC = () => {
             }
             
             setStatus('Creating ZIP file...');
-            const zipBlob = await zip.generateAsync({ type: 'blob' });
+            // FIX: Add explicit Blob type annotation to potentially resolve a type inference issue.
+            const zipBlob: Blob = await zip.generateAsync({ type: 'blob' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(zipBlob);
             link.download = `${file.name.replace(/\.pdf$/i, '')}.zip`;

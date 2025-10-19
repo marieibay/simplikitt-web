@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PdfPageCounterRangeIcon } from '../components/icons/PdfPageCounterRangeIcon';
-
-declare const pdfjsLib: any;
+import * as pdfjsLib from 'pdfjs-dist';
 
 const PdfPageCounterRangePage: React.FC = () => {
     const [pdfFile, setPdfFile] = useState<File | null>(null);

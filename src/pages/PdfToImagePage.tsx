@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-
-declare const pdfjsLib: any;
+import * as pdfjsLib from 'pdfjs-dist';
 
 interface PdfToImagePageProps {
   Icon: React.FC<any>;
