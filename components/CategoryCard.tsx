@@ -23,11 +23,11 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({ title, description, 
   const selectedColor = colors[colorName as keyof typeof colors] || colors.blue;
 
   return (
-    <Link to={to} className={`group block flex-1 min-w-0 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out ${selectedColor.bg}`}>
+    <Link to={to} className={`group flex flex-col flex-1 min-w-0 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out ${selectedColor.bg}`}>
       <div className="p-6 flex items-center justify-center">
         <Icon className="w-12 h-12" />
       </div>
-      <div className="bg-slate-50 p-4 m-2 mb-3 -mt-2 rounded-xl border border-slate-200/80">
+      <div className="bg-slate-50 p-4 m-2 mb-3 -mt-2 rounded-xl border border-slate-200/80 flex-grow">
         <h3 className="text-lg font-bold text-gray-900 leading-tight">{title}</h3>
         <p className="mt-1 text-sm text-gray-600">{description}</p>
         <p className="mt-2 text-xs font-semibold text-gray-400">{toolCount} Tools</p>
