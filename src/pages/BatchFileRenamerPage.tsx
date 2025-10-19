@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BatchFileRenamerIcon } from '../components/icons/BatchFileRenamerIcon';
+import { FileEdit } from 'lucide-react';
 import JSZip from 'jszip';
 
 const BatchFileRenamerPage: React.FC = () => {
@@ -45,7 +45,7 @@ const BatchFileRenamerPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <BatchFileRenamerIcon className="w-10 h-10 text-purple-500" />
+        <FileEdit className="w-10 h-10 text-purple-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Batch File Renamer</h1>
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md border max-w-2xl mx-auto space-y-4">

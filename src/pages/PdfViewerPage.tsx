@@ -4,7 +4,6 @@ import * as pdfjsLib from 'pdfjs-dist';
 
 const PdfViewerPage: React.FC = () => {
     const [file, setFile] = useState<File | null>(null);
-    const [numPages, setNumPages] = useState<number | null>(null);
     const canvasContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -17,7 +16,6 @@ const PdfViewerPage: React.FC = () => {
             const arrayBuffer = await file.arrayBuffer();
             const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
             const pdf = await loadingTask.promise;
-            setNumPages(pdf.numPages);
 
             for (let i = 1; i <= pdf.numPages; i++) {
                 const page = await pdf.getPage(i);
@@ -28,8 +26,8 @@ const PdfViewerPage: React.FC = () => {
                 canvas.height = viewport.height;
                 canvas.width = viewport.width;
                 if (context) {
-                    // FIX: The render parameters for this version of pdf.js might have a stricter type.
-                    await page.render({ canvasContext: context, viewport: viewport }).promise;
+                    // FIX: Add the 'canvas' property to the render parameters to match the expected type.
+                    await page.render({ canvasContext: context, viewport: viewport, canvas: canvas }).promise;
                     canvasContainerRef.current?.appendChild(canvas);
                 }
             }

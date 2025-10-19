@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { SplitPdfIcon } from '../components/icons/SplitPdfIcon';
+import { Split } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
 
 const SplitPdfPage: React.FC = () => {
@@ -46,7 +45,7 @@ const SplitPdfPage: React.FC = () => {
       copiedPages.forEach(page => newPdf.addPage(page));
       
       const newPdfBytes = await newPdf.save();
-      const blob = new Blob([newPdfBytes], { type: 'application/pdf' });
+      const blob = new Blob([newPdfBytes as any], { type: 'application/pdf' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
       link.download = `split_${file.name}`;
@@ -62,7 +61,7 @@ const SplitPdfPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <SplitPdfIcon className="w-10 h-10 text-green-700" />
+        <Split className="w-10 h-10 text-green-700" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Split PDF</h1>
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md border max-w-xl mx-auto space-y-4">

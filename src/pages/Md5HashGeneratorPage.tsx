@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Md5HashGeneratorIcon } from '../components/icons/Md5HashGeneratorIcon';
+import { Shield } from 'lucide-react';
 import CryptoJS from 'crypto-js';
 
 const Md5HashGeneratorPage: React.FC = () => {
@@ -63,7 +62,7 @@ const Md5HashGeneratorPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <Md5HashGeneratorIcon className="w-10 h-10 text-indigo-500" />
+        <Shield className="w-10 h-10 text-indigo-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">MD5 Hash Generator</h1>
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md border max-w-2xl mx-auto space-y-4">

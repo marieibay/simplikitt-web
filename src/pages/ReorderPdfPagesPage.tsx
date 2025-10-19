@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { ReorderPdfPagesIcon } from '../components/icons/ReorderPdfPagesIcon';
+import { List } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';
 import * as PDFLib from 'pdf-lib';
 
@@ -34,8 +34,8 @@ const ReorderPdfPagesPage: React.FC = () => {
                 canvas.height = viewport.height;
                 const context = canvas.getContext('2d');
                 if (context) {
-                    // FIX: The render parameters for this version of pdf.js might have a stricter type.
-                    await page.render({ canvasContext: context, viewport: viewport }).promise;
+                    // FIX: Add the 'canvas' property to the render parameters to match the expected type.
+                    await page.render({ canvasContext: context, viewport: viewport, canvas: canvas }).promise;
                     previews.push({ originalIndex: i - 1, dataUrl: canvas.toDataURL() });
                 }
             }
@@ -71,7 +71,7 @@ const ReorderPdfPagesPage: React.FC = () => {
             copiedPages.forEach(page => newPdf.addPage(page));
 
             const newPdfBytes = await newPdf.save();
-            const blob = new Blob([newPdfBytes], { type: 'application/pdf' });
+            const blob = new Blob([newPdfBytes as any], { type: 'application/pdf' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = `reordered_${pdfFile.name}`;
@@ -88,7 +88,7 @@ const ReorderPdfPagesPage: React.FC = () => {
     return (
         <div className="container mx-auto p-4 md:p-8">
             <div className="flex items-center gap-4 mb-8">
-                <ReorderPdfPagesIcon className="w-10 h-10 text-green-500" />
+                <List className="w-10 h-10 text-green-500" />
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Reorder PDF Pages</h1>
             </div>
             

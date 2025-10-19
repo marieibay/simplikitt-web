@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PdfPasswordRemoverIcon } from '../components/icons/PdfPasswordRemoverIcon';
+import { Lock } from 'lucide-react';
 import * as PDFLib from 'pdf-lib';
 
 const PdfPasswordRemoverPage: React.FC = () => {
@@ -20,7 +20,7 @@ const PdfPasswordRemoverPage: React.FC = () => {
         ignoreEncryption: true,
       });
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
       link.download = `unlocked_${file.name}`;
@@ -36,7 +36,7 @@ const PdfPasswordRemoverPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <PdfPasswordRemoverIcon className="w-10 h-10 text-green-800" />
+        <Lock className="w-10 h-10 text-green-800" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">PDF Password Remover</h1>
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md border max-w-xl mx-auto text-center space-y-4">

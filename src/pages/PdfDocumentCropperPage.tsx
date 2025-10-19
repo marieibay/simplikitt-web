@@ -1,14 +1,13 @@
-
 import React, { useState, useRef } from 'react';
-import { PdfDocumentCropperIcon } from '../components/icons/PdfDocumentCropperIcon';
-import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
+import { Crop } from 'lucide-react';
+import ReactCrop, { type Crop as T_Crop, centerCrop, makeAspectCrop, PixelCrop } from 'react-image-crop';
 import * as pdfjsLib from 'pdfjs-dist';
 import * as PDFLib from 'pdf-lib';
 
 const PdfDocumentCropperPage: React.FC = () => {
     const [pdfFile, setPdfFile] = useState<File | null>(null);
     const [imgSrc, setImgSrc] = useState('');
-    const [crop, setCrop] = useState<Crop>();
+    const [crop, setCrop] = useState<T_Crop>();
     const [isProcessing, setIsProcessing] = useState(false);
     const [originalPdfDims, setOriginalPdfDims] = useState<{ width: number, height: number } | null>(null);
     const imgRef = useRef<HTMLImageElement>(null);
@@ -31,8 +30,8 @@ const PdfDocumentCropperPage: React.FC = () => {
             canvas.height = viewport.height;
             const context = canvas.getContext('2d');
             if (context) {
-                // FIX: The render parameters for this version of pdf.js seem to require the canvas element.
-                await page.render({ canvasContext: context, viewport: viewport }).promise;
+                // FIX: Add the 'canvas' property to the render parameters to match the expected type.
+                await page.render({ canvasContext: context, viewport, canvas }).promise;
                 setImgSrc(canvas.toDataURL('image/png'));
             }
             setIsProcessing(false);
@@ -62,7 +61,7 @@ const PdfDocumentCropperPage: React.FC = () => {
             });
 
             const pdfBytesSaved = await pdfDoc.save();
-            const blob = new Blob([pdfBytesSaved], { type: 'application/pdf' });
+            const blob = new Blob([pdfBytesSaved as any], { type: 'application/pdf' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = `cropped_${pdfFile.name}`;
@@ -90,7 +89,7 @@ const PdfDocumentCropperPage: React.FC = () => {
     return (
         <div className="container mx-auto p-4 md:p-8">
             <div className="flex items-center gap-4 mb-8">
-                <PdfDocumentCropperIcon className="w-10 h-10 text-green-500" />
+                <Crop className="w-10 h-10 text-green-500" />
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Crop PDF Document</h1>
             </div>
 
@@ -107,9 +106,8 @@ const PdfDocumentCropperPage: React.FC = () => {
                         {imgSrc && (
                              <ReactCrop
                                 crop={crop}
-                                onChange={c => setCrop(c)}
+                                onChange={(_, p) => setCrop(p)}
                                 aspect={undefined}
-                                unit="%"
                             >
                                 <img ref={imgRef} src={imgSrc} onLoad={onImageLoad} alt="Crop preview" style={{ maxHeight: '60vh' }} />
                             </ReactCrop>

@@ -15,8 +15,10 @@ const PdfPageCounterRangePage: React.FC = () => {
         for (const part of parts) {
             const trimmed = part.trim();
             if (trimmed.includes('-')) {
-                const [start, end] = trimmed.split('-').map(Number);
-                if (!isNaN(start) && !isNaN(end) && start <= end) {
+                const rangeParts = trimmed.split('-').map(Number);
+                if (rangeParts.length === 2 && !isNaN(rangeParts[0]) && !isNaN(rangeParts[1]) && rangeParts[0] <= rangeParts[1]) {
+                    const start = rangeParts[0];
+                    const end = rangeParts[1];
                     for (let i = start; i <= end; i++) {
                         if (i > 0 && i <= max) indices.add(i - 1);
                     }

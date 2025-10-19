@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Tool } from '../types';
-import { LockIcon } from './icons/LockIcon';
+import { Lock } from 'lucide-react';
 import { categoryDetails } from '../constants/categories';
 
 interface ToolCardProps {
@@ -43,7 +42,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
     >
       {isPremium && (
         <div className="absolute top-3 right-3 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1 z-10">
-          <LockIcon className="w-3 h-3" />
+          <Lock className="w-3 h-3" />
           <span>PRO</span>
         </div>
       )}

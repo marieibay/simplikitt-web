@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { Replace } from 'lucide-react';
 
 const ImageConverterPage: React.FC = () => {
-  const [imageFile, setImageFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [outputFormat, setOutputFormat] = useState<'png' | 'jpeg'>('png');
   const [jpegQuality, setJpegQuality] = useState<number>(0.92);
@@ -15,7 +14,6 @@ const ImageConverterPage: React.FC = () => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && file.type.startsWith('image/')) {
-      setImageFile(file);
       setOriginalFileName(file.name.substring(0, file.name.lastIndexOf('.')) || file.name);
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -78,7 +76,6 @@ const ImageConverterPage: React.FC = () => {
                 <img src={preview} alt="Original preview" className="rounded-lg shadow-md border max-w-full h-auto" />
                 <button 
                     onClick={() => {
-                        setImageFile(null);
                         setPreview(null);
                         setConvertedImageUrl(null);
                         if(fileInputRef.current) fileInputRef.current.value = "";

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MergePdfIcon } from '../components/icons/MergePdfIcon';
+import { MergePdfIcon } from '../components/icons/MergePdfIcon.tsx';
 import * as PDFLib from 'pdf-lib';
 
 const MergePdfPage: React.FC = () => {
@@ -29,7 +29,7 @@ const MergePdfPage: React.FC = () => {
       }
       
       const mergedPdfBytes = await mergedPdf.save();
-      const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+      const blob = new Blob([mergedPdfBytes as any], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;

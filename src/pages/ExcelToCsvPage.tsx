@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExcelToCsvIcon } from '../components/icons/ExcelToCsvIcon';
+import { Replace } from 'lucide-react';
 import * as XLSX from 'xlsx';
 
 const ExcelToCsvPage: React.FC = () => {
@@ -42,7 +42,7 @@ const ExcelToCsvPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <ExcelToCsvIcon className="w-10 h-10 text-purple-500" />
+        <Replace className="w-10 h-10 text-purple-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Excel (XLSX) to CSV</h1>
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md border max-w-lg mx-auto text-center space-y-4">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PdfTextReplacerIcon } from '../components/icons/PdfTextReplacerIcon';
+import { Replace } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';
 import * as PDFLib from 'pdf-lib';
 
@@ -92,7 +92,7 @@ const PdfTextReplacerPage: React.FC = () => {
             }
 
             const pdfBytes = await pdfDoc.save();
-            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = `replaced_text_${file?.name || 'document'}.pdf`;
@@ -111,7 +111,7 @@ const PdfTextReplacerPage: React.FC = () => {
     return (
         <div className="container mx-auto p-4 md:p-8">
             <div className="flex items-center gap-4 mb-8">
-                <PdfTextReplacerIcon className="w-10 h-10 text-green-500" />
+                <Replace className="w-10 h-10 text-green-500" />
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-800">PDF Text Replacer</h1>
             </div>
              <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6 rounded-md" role="alert">

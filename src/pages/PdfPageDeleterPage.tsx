@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { PdfPageDeleterIcon } from '../components/icons/PdfPageDeleterIcon';
 import { PDFDocument } from 'pdf-lib';
@@ -23,14 +21,12 @@ const PdfPageDeleterPage: React.FC = () => {
             });
             
             const pageCount = pdfDoc.getPageCount();
-            // FIX: Robustly parse page ranges and ensure flatMap callback always returns an array.
             const indicesToDelete = pagesToDelete.split(',')
                 .flatMap(r => {
                     const trimmed = r.trim();
                     if (trimmed.includes('-')) {
                         const parts = trimmed.split('-').map(s => parseInt(s, 10));
                         if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) && parts[0] <= parts[1]) {
-                            // FIX: Destructuring was causing a type inference issue with the arithmetic operations below.
                             const start = parts[0];
                             const end = parts[1];
                             return Array.from({ length: end - start + 1 }, (_, i) => start + i - 1);
@@ -55,7 +51,7 @@ const PdfPageDeleterPage: React.FC = () => {
             }
 
             const pdfBytesSaved = await pdfDoc.save();
-            const blob = new Blob([pdfBytesSaved], { type: 'application/pdf' });
+            const blob = new Blob([pdfBytesSaved as any], { type: 'application/pdf' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = `edited_${pdfFile.name}`;
