@@ -11,7 +11,6 @@ const ImageCompressorPage: React.FC = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      // FIX: Explicitly type 'file' as File to resolve property 'type' does not exist error.
       setFiles(Array.from(e.target.files).filter((file: File) => file.type === 'image/jpeg'));
     }
   };

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DocxHeaderFooterExtractorIcon } from '../components/icons/DocxHeaderFooterExtractorIcon';
-
-declare const JSZip: any;
+import JSZip from 'jszip';
 
 const DocxHeaderFooterExtractorPage: React.FC = () => {
   const [headerText, setHeaderText] = useState('');

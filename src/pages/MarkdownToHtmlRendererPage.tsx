@@ -8,7 +8,7 @@ const MarkdownToHtmlRendererPage: React.FC = () => {
 
   useEffect(() => {
     if (typeof marked !== 'undefined') {
-      setHtmlOutput(marked.parse(markdownInput));
+      Promise.resolve(marked.parse(markdownInput)).then(setHtmlOutput);
     }
   }, [markdownInput]);
 

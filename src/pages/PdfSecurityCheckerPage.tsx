@@ -23,14 +23,15 @@ const PdfSecurityCheckerPage: React.FC = () => {
             const arrayBuffer = await file.arrayBuffer();
             const pdf = await pdfjsLib.getDocument({ data: arrayBuffer, password: '' }).promise;
             
-            const meta = await pdf.getMetadata();
             const perms = await pdf.getPermissions();
 
             const permissionMap = {
+                // FIX: Corrected permission flag names from MODIFY to MODIFY_CONTENTS
                 [pdfjsLib.PermissionFlag.PRINT]: 'Printing',
-                [pdfjsLib.PermissionFlag.MODIFY]: 'Modifying',
+                [pdfjsLib.PermissionFlag.MODIFY_CONTENTS]: 'Modifying',
                 [pdfjsLib.PermissionFlag.COPY]: 'Copying Text/Graphics',
-                [pdfjsLib.PermissionFlag.ADD_OR_MODIFY]: 'Adding/Modifying Annotations',
+                // FIX: Corrected permission flag names from ADD_OR_MODIFY to MODIFY_ANNOTATIONS
+                [pdfjsLib.PermissionFlag.MODIFY_ANNOTATIONS]: 'Adding/Modifying Annotations',
             };
             
             const grantedPermissions = perms ? Object.entries(permissionMap)
@@ -38,7 +39,8 @@ const PdfSecurityCheckerPage: React.FC = () => {
                 .map(([, desc]) => desc) : ['All permissions granted (no restrictions found)'];
 
             setSecurityInfo({
-                isEncrypted: meta.info.IsEncrypted || false,
+                // FIX: Use pdf.isEncrypted instead of meta.info.IsEncrypted
+                isEncrypted: pdf.isEncrypted || false,
                 permissions: grantedPermissions
             });
 

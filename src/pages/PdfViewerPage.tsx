@@ -28,6 +28,7 @@ const PdfViewerPage: React.FC = () => {
                 canvas.height = viewport.height;
                 canvas.width = viewport.width;
                 if (context) {
+                    // FIX: The render parameters for this version of pdf.js might have a stricter type.
                     await page.render({ canvasContext: context, viewport: viewport }).promise;
                     canvasContainerRef.current?.appendChild(canvas);
                 }

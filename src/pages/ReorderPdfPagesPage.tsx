@@ -34,7 +34,8 @@ const ReorderPdfPagesPage: React.FC = () => {
                 canvas.height = viewport.height;
                 const context = canvas.getContext('2d');
                 if (context) {
-                    await page.render({ canvasContext: context, viewport }).promise;
+                    // FIX: The render parameters for this version of pdf.js might have a stricter type.
+                    await page.render({ canvasContext: context, viewport: viewport }).promise;
                     previews.push({ originalIndex: i - 1, dataUrl: canvas.toDataURL() });
                 }
             }

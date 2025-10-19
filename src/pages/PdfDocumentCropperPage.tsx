@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { PdfDocumentCropperIcon } from '../components/icons/PdfDocumentCropperIcon';
 import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
@@ -30,7 +31,8 @@ const PdfDocumentCropperPage: React.FC = () => {
             canvas.height = viewport.height;
             const context = canvas.getContext('2d');
             if (context) {
-                await page.render({ canvasContext: context, viewport }).promise;
+                // FIX: The render parameters for this version of pdf.js seem to require the canvas element.
+                await page.render({ canvasContext: context, viewport: viewport }).promise;
                 setImgSrc(canvas.toDataURL('image/png'));
             }
             setIsProcessing(false);

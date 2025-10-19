@@ -29,7 +29,8 @@ const PdfToSvgPage: React.FC = () => {
                 canvas.height = viewport.height;
                 const context = canvas.getContext('2d');
                 if (context) {
-                    await page.render({ canvasContext: context, viewport }).promise;
+                    // FIX: The render parameters for this version of pdf.js might have a stricter type.
+                    await page.render({ canvasContext: context, viewport: viewport }).promise;
                     const dataUrl = canvas.toDataURL('image/png');
                     
                     const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">
@@ -40,7 +41,6 @@ const PdfToSvgPage: React.FC = () => {
             }
             
             setStatus('Creating ZIP file...');
-            // FIX: Add explicit Blob type annotation to potentially resolve a type inference issue.
             const zipBlob: Blob = await zip.generateAsync({ type: 'blob' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(zipBlob);

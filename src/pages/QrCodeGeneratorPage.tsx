@@ -9,7 +9,7 @@ const QrCodeGeneratorPage: React.FC = () => {
 
   useEffect(() => {
     if (canvasRef.current) {
-      QRCode.toCanvas(canvasRef.current, text || ' ', { width: 256, margin: 2, errorCorrectionLevel: 'H' }, (error: Error) => {
+      QRCode.toCanvas(canvasRef.current, text || ' ', { width: 256, margin: 2, errorCorrectionLevel: 'H' }, (error?: Error | null) => {
         if (error) console.error(error);
       });
     }
