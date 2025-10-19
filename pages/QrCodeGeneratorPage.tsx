@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { QrCodeGeneratorIcon } from '../components/icons/QrCodeGeneratorIcon';
+import { QrCode } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -51,7 +51,7 @@ const QrCodeGeneratorPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <QrCodeGeneratorIcon className="w-10 h-10 text-indigo-500" />
+        <QrCode className="w-10 h-10 text-indigo-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">QR Code Generator</h1>
       </div>
 
@@ -86,7 +86,7 @@ const QrCodeGeneratorPage: React.FC = () => {
             <canvas ref={canvasRef} className="max-w-full h-auto rounded-md shadow-lg" />
           ) : (
             <div className="text-center text-gray-500">
-              <QrCodeGeneratorIcon className="w-24 h-24 mx-auto text-gray-300" />
+              <QrCode className="w-24 h-24 mx-auto text-gray-300" />
               <p className="mt-4 text-lg">Your QR code will appear here</p>
             </div>
           )}

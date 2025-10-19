@@ -1,11 +1,11 @@
 import React from 'react';
-import { PngToJpgBulkIcon } from '../components/icons/PngToJpgBulkIcon';
+import { FlipHorizontal } from 'lucide-react';
 import { BulkImageConverterPage } from './BulkImageConverterPage';
 
 const BulkPngToJpgPage: React.FC = () => {
   return (
     <BulkImageConverterPage
-      Icon={PngToJpgBulkIcon}
+      Icon={FlipHorizontal}
       title="Bulk PNG to JPG Converter"
       fromFormat="png"
       toFormat="jpeg"

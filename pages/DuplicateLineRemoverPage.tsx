@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { DuplicateLineRemoverIcon } from '../components/icons/DuplicateLineRemoverIcon';
+import { ListMinus } from 'lucide-react';
 
 const DuplicateLineRemoverPage: React.FC = () => {
   const [input, setInput] = useState<string>('');
@@ -26,7 +26,7 @@ const DuplicateLineRemoverPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <DuplicateLineRemoverIcon className="w-10 h-10 text-cyan-500" />
+        <ListMinus className="w-10 h-10 text-cyan-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Duplicate Line Remover</h1>
       </div>
 

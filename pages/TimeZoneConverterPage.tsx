@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TimeZoneConverterIcon } from '../components/icons/TimeZoneConverterIcon';
 
-// FIX: The `supportedValuesOf` API is modern and may not be in older TypeScript lib definitions.
-// This causes a compile-time error. Added a try-catch block with a fallback list of 
-// timezones for robustness against both TypeScript errors and older browser environments.
 let timeZones: string[];
 try {
   // Use the Intl API to get a comprehensive list of IANA time zones supported by the browser.
@@ -27,9 +24,11 @@ try {
     'Asia/Kolkata',
     'Australia/Sydney',
     'Africa/Cairo',
-    // Ensure the user's current timezone is in the list
-    Intl.DateTimeFormat().resolvedOptions().timeZone,
   ];
+  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  if (!fallbackTimeZones.includes(userTimeZone)) {
+      fallbackTimeZones.push(userTimeZone);
+  }
   // Remove duplicates and sort alphabetically
   timeZones = [...new Set(fallbackTimeZones)].sort();
 }

@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { PercentageCalculatorIcon } from '../components/icons/PercentageCalculatorIcon';
+import { Percent } from 'lucide-react';
 
 const PercentageCalculatorPage: React.FC = () => {
   const [val1, setVal1] = useState<string>('');
@@ -43,7 +43,7 @@ const PercentageCalculatorPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <PercentageCalculatorIcon className="w-10 h-10 text-teal-500" />
+        <Percent className="w-10 h-10 text-teal-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Percentage Calculator</h1>
       </div>
       

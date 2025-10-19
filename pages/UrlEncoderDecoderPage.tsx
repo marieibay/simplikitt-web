@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { UrlEncoderDecoderIcon } from '../components/icons/UrlEncoderDecoderIcon';
+import { Link } from 'lucide-react';
 
 const UrlEncoderDecoderPage: React.FC = () => {
   const [text, setText] = useState<string>('');
@@ -36,7 +36,7 @@ const UrlEncoderDecoderPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <UrlEncoderDecoderIcon className="w-10 h-10 text-pink-500" />
+        <Link className="w-10 h-10 text-pink-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">URL Encoder / Decoder</h1>
       </div>
 

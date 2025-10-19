@@ -5,7 +5,6 @@ const CountdownTimerPage: React.FC = () => {
     const [initialSeconds, setInitialSeconds] = useState(60);
     const [seconds, setSeconds] = useState(60);
     const [isActive, setIsActive] = useState(false);
-    // FIX: Use ReturnType<typeof setInterval> for browser compatibility instead of NodeJS.Timeout
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     useEffect(() => {

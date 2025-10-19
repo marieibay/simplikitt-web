@@ -1,10 +1,6 @@
 import React, { SVGProps } from 'react';
+import { FileCog } from 'lucide-react';
 
 export const HtaccessRedirectGeneratorIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M4 12h16" />
-    <path d="m16 8-4 4 4 4" />
-    <path d="M4 4h16" />
-    <path d="M4 20h16" />
-  </svg>
+  <FileCog {...props} />
 );

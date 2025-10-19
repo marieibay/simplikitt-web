@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ImageResizerIcon } from '../components/icons/ImageResizerIcon';
+import { Maximize } from 'lucide-react';
 
 const ImageResizerPage: React.FC = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -104,7 +104,7 @@ const ImageResizerPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <ImageResizerIcon className="w-12 h-12 text-purple-500" />
+        <Maximize className="w-12 h-12 text-purple-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Image Resizer</h1>
       </div>
 

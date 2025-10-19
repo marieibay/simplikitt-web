@@ -1,28 +1,9 @@
-import React from 'react';
+import React, { SVGProps } from 'react';
+import { Image, Type, FileText, File, Calculator, Code } from 'lucide-react';
 
-// The props passed will include className, which is compatible with <img>
-interface IconProps extends React.HTMLAttributes<HTMLImageElement> {}
-
-export const CatImageToolIcon: React.FC<IconProps> = (props) => (
-  <img src="https://i.imgur.com/2fSinTK.png" alt="Image Tools Icon" {...props} />
-);
-
-export const CatTextToolIcon: React.FC<IconProps> = (props) => (
-  <img src="https://i.imgur.com/pWLz7Qk.png" alt="Text & List Tools Icon" {...props} />
-);
-
-export const CatPdfToolIcon: React.FC<IconProps> = (props) => (
-  <img src="https://i.imgur.com/fcPM5or.png" alt="PDF & Document Tools Icon" {...props} />
-);
-
-export const CatFileConverterIcon: React.FC<IconProps> = (props) => (
-  <img src="https://i.imgur.com/hCEBg9R.png" alt="File Converters & Utilities Icon" {...props} />
-);
-
-export const CatCalculatorIcon: React.FC<IconProps> = (props) => (
-  <img src="https://i.imgur.com/Aj5fAOO.png" alt="Calculators & Time Tools Icon" {...props} />
-);
-
-export const CatDeveloperToolIcon: React.FC<IconProps> = (props) => (
-  <img src="https://i.imgur.com/2KCBdel.png" alt="Web & Developer Tools Icon" {...props} />
-);
+export const CatImageToolIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => <Image {...props} stroke="white" />;
+export const CatTextToolIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => <Type {...props} stroke="white" />;
+export const CatPdfToolIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => <FileText {...props} stroke="white" />;
+export const CatFileConverterIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => <File {...props} stroke="white" />;
+export const CatCalculatorIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => <Calculator {...props} stroke="white" />;
+export const CatDeveloperToolIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => <Code {...props} stroke="white" />;

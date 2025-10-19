@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BulkImageResizerIcon } from '../components/icons/BulkImageResizerIcon';
+import { BoxSelect } from 'lucide-react';
 
 declare const JSZip: any;
 
@@ -60,7 +60,7 @@ const BulkImageResizerPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <BulkImageResizerIcon className="w-10 h-10 text-purple-600" />
+        <BoxSelect className="w-10 h-10 text-purple-600" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Bulk Image Resizer</h1>
       </div>
       <div className="bg-white p-6 rounded-lg shadow-md border max-w-2xl mx-auto space-y-4">

@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo } from 'react';
-import { WordCharCounterIcon } from '../components/icons/WordCharCounterIcon';
+import { Type } from 'lucide-react';
 
 interface Counts {
   words: number;
@@ -35,7 +35,7 @@ const WordCounterPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-6">
-        <WordCharCounterIcon className="w-10 h-10 text-green-500" />
+        <Type className="w-10 h-10 text-green-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Word / Char Counter</h1>
       </div>
       

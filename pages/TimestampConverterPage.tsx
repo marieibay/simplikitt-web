@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { TimestampConverterIcon } from '../components/icons/TimestampConverterIcon';
+import { Clock } from 'lucide-react';
 
 const TimestampConverterPage: React.FC = () => {
   const [unixTimestamp, setUnixTimestamp] = useState<string>('');
@@ -43,7 +43,7 @@ const TimestampConverterPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <TimestampConverterIcon className="w-10 h-10 text-blue-800" />
+        <Clock className="w-10 h-10 text-blue-800" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Timestamp Converter</h1>
       </div>
       

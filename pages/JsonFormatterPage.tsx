@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { JsonFormatterIcon } from '../components/icons/JsonFormatterIcon';
+import { AlignLeft } from 'lucide-react';
 
 const JsonFormatterPage: React.FC = () => {
   const [inputJson, setInputJson] = useState('');
@@ -47,7 +47,7 @@ const JsonFormatterPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-6">
-        <JsonFormatterIcon className="w-10 h-10 text-blue-500" />
+        <AlignLeft className="w-10 h-10 text-blue-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">JSON Formatter</h1>
       </div>
       

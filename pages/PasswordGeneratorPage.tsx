@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { PasswordGeneratorIcon } from '../components/icons/PasswordGeneratorIcon';
+import { Key, RefreshCw } from 'lucide-react';
 
 const PasswordGeneratorPage: React.FC = () => {
   const [password, setPassword] = useState<string>('');
@@ -49,7 +49,7 @@ const PasswordGeneratorPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8 max-w-2xl">
       <div className="flex items-center gap-4 mb-8">
-        <PasswordGeneratorIcon className="w-10 h-10 text-orange-500" />
+        <Key className="w-10 h-10 text-orange-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Password Generator</h1>
       </div>
 
@@ -98,7 +98,7 @@ const PasswordGeneratorPage: React.FC = () => {
         </div>
       </div>
       <button onClick={generatePassword} className="mt-6 w-full py-3 bg-gray-800 text-white font-bold rounded-lg hover:bg-gray-900 transition shadow-md flex items-center justify-center gap-2">
-         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+         <RefreshCw className="w-5 h-5"/>
         Regenerate
       </button>
     </div>

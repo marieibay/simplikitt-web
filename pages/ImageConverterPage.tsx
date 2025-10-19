@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { ImageConverterIcon } from '../components/icons/ImageConverterIcon';
+import { Replace } from 'lucide-react';
 
 const ImageConverterPage: React.FC = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -56,7 +56,7 @@ const ImageConverterPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <ImageConverterIcon className="w-12 h-12 text-yellow-500" />
+        <Replace className="w-12 h-12 text-yellow-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">JPG & PNG Converter</h1>
       </div>
 

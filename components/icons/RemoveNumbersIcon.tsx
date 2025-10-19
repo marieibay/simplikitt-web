@@ -1,13 +1,6 @@
 import React, { SVGProps } from 'react';
+import { Eraser } from 'lucide-react';
 
 export const RemoveNumbersIcon: React.FC<SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M4 12h16" />
-    <path d="m18 8-8 8" />
-    <path d="m10 8 8 8" />
-    <path d="M4 6h2" />
-    <path d="M4 18h2" />
-    <path d="M18 6h2" />
-    <path d="M18 18h2" />
-  </svg>
+  <Eraser {...props} />
 );
