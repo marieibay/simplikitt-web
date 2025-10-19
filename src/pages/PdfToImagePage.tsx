@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import * as pdfjsLib from 'pdfjs-dist';
-import type { PageViewport } from 'pdfjs-dist';
 
 interface PdfToImagePageProps {
   Icon: React.FC<any>;
@@ -24,14 +23,14 @@ const PdfToImagePage: React.FC<PdfToImagePageProps> = ({ Icon, title, color, out
         const imageUrls: string[] = [];
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
-          const viewport: PageViewport = page.getViewport({ scale: 1.5 });
+          const viewport = page.getViewport({ scale: 1.5 });
           const canvas = document.createElement('canvas');
           canvas.width = viewport.width;
           canvas.height = viewport.height;
           const context = canvas.getContext('2d');
           if (context) {
-            // FIX: The render parameters for this version of pdf.js might have a stricter type, requiring the canvas element as well.
-            await page.render({ canvasContext: context, viewport: viewport, canvas: canvas }).promise;
+            // FIX: The `page.render` method in this version of pdf.js returns a promise directly. The `.promise` was removed.
+            await page.render({ canvasContext: context, viewport });
             imageUrls.push(canvas.toDataURL(`image/${outputFormat}`));
           }
         }

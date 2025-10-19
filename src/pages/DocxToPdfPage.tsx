@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { FileUp } from 'lucide-react';
+import { FileUp as DocxToPdfIcon } from 'lucide-react';
 import mammoth from 'mammoth';
 import html2pdf from 'html2pdf.js';
 
@@ -55,7 +55,7 @@ const DocxToPdfPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 md:p-8">
       <div className="flex items-center gap-4 mb-8">
-        <FileUp className="w-10 h-10 text-purple-500" />
+        <DocxToPdfIcon className="w-10 h-10 text-purple-500" />
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800">DOCX to PDF Converter</h1>
       </div>
       

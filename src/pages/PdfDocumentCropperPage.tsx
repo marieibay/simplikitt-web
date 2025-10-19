@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Crop } from 'lucide-react';
-import ReactCrop, { type Crop as T_Crop, centerCrop, makeAspectCrop, PixelCrop } from 'react-image-crop';
+import ReactCrop, { type Crop as T_Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
 import * as pdfjsLib from 'pdfjs-dist';
 import * as PDFLib from 'pdf-lib';
 
@@ -30,8 +30,8 @@ const PdfDocumentCropperPage: React.FC = () => {
             canvas.height = viewport.height;
             const context = canvas.getContext('2d');
             if (context) {
-                // FIX: Add the 'canvas' property to the render parameters to match the expected type.
-                await page.render({ canvasContext: context, viewport, canvas }).promise;
+                // FIX: The `page.render` method in this version of pdf.js returns a promise directly. The `.promise` was removed.
+                await page.render({ canvasContext: context, viewport });
                 setImgSrc(canvas.toDataURL('image/png'));
             }
             setIsProcessing(false);
@@ -106,7 +106,7 @@ const PdfDocumentCropperPage: React.FC = () => {
                         {imgSrc && (
                              <ReactCrop
                                 crop={crop}
-                                onChange={(_, p) => setCrop(p)}
+                                onChange={(_, percentCrop) => setCrop(percentCrop)}
                                 aspect={undefined}
                             >
                                 <img ref={imgRef} src={imgSrc} onLoad={onImageLoad} alt="Crop preview" style={{ maxHeight: '60vh' }} />

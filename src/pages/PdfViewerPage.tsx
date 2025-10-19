@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { PdfViewerIcon } from '../components/icons/PdfViewerIcon';
+import { View as PdfViewerIcon } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';
 
 const PdfViewerPage: React.FC = () => {
@@ -26,8 +26,8 @@ const PdfViewerPage: React.FC = () => {
                 canvas.height = viewport.height;
                 canvas.width = viewport.width;
                 if (context) {
-                    // FIX: Add the 'canvas' property to the render parameters to match the expected type.
-                    await page.render({ canvasContext: context, viewport: viewport, canvas: canvas }).promise;
+                    // FIX: The `page.render` method in this version of pdf.js returns a promise directly. The `.promise` was removed.
+                    await page.render({ canvasContext: context, viewport: viewport });
                     canvasContainerRef.current?.appendChild(canvas);
                 }
             }

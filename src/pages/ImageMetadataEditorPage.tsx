@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageMetadataEditorIcon } from '../components/icons/ImageMetadataEditorIcon';
+import { FileCog as ImageMetadataEditorIcon } from 'lucide-react';
 import * as piexif from 'piexif-ts';
 
 const ImageMetadataEditorPage: React.FC = () => {

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { List } from 'lucide-react';
+import { List as ReorderPdfPagesIcon } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';
 import * as PDFLib from 'pdf-lib';
 
@@ -34,8 +34,8 @@ const ReorderPdfPagesPage: React.FC = () => {
                 canvas.height = viewport.height;
                 const context = canvas.getContext('2d');
                 if (context) {
-                    // FIX: Add the 'canvas' property to the render parameters to match the expected type.
-                    await page.render({ canvasContext: context, viewport: viewport, canvas: canvas }).promise;
+                    // FIX: The `page.render` method in this version of pdf.js returns a promise directly. The `.promise` was removed.
+                    await page.render({ canvasContext: context, viewport });
                     previews.push({ originalIndex: i - 1, dataUrl: canvas.toDataURL() });
                 }
             }
@@ -88,7 +88,7 @@ const ReorderPdfPagesPage: React.FC = () => {
     return (
         <div className="container mx-auto p-4 md:p-8">
             <div className="flex items-center gap-4 mb-8">
-                <List className="w-10 h-10 text-green-500" />
+                <ReorderPdfPagesIcon className="w-10 h-10 text-green-500" />
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Reorder PDF Pages</h1>
             </div>
             

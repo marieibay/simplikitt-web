@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { ImageDpiChangerIcon } from '../components/icons/ImageDpiChangerIcon';
+import { Scaling as ImageDpiChangerIcon } from 'lucide-react';
 import * as piexif from 'piexif-ts';
 
 const ImageDpiChangerPage: React.FC = () => {

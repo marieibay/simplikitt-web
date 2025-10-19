@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileImage } from 'lucide-react';
+import { FileImage as PdfToSvgIcon } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';
 import JSZip from 'jszip';
 
@@ -29,8 +29,8 @@ const PdfToSvgPage: React.FC = () => {
                 canvas.height = viewport.height;
                 const context = canvas.getContext('2d');
                 if (context) {
-                    // FIX: Add the 'canvas' property to the render parameters to match the expected type.
-                    await page.render({ canvasContext: context, viewport: viewport, canvas: canvas }).promise;
+                    // FIX: The `page.render` method in this version of pdf.js returns a promise directly. The `.promise` was removed.
+                    await page.render({ canvasContext: context, viewport });
                     const dataUrl = canvas.toDataURL('image/png');
                     
                     const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">
@@ -60,7 +60,7 @@ const PdfToSvgPage: React.FC = () => {
     return (
         <div className="container mx-auto p-4 md:p-8">
             <div className="flex items-center gap-4 mb-8">
-                <FileImage className="w-10 h-10 text-green-500" />
+                <PdfToSvgIcon className="w-10 h-10 text-green-500" />
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-800">PDF to SVG Converter</h1>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md border max-w-lg mx-auto text-center space-y-4">

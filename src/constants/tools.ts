@@ -1,6 +1,8 @@
 import { Tool } from '../types';
 import {
   AlignLeft,
+  // FIX: Added AppWindow to the import list.
+  AppWindow,
   ArrowLeftRight,
   BarChart,
   Binary,

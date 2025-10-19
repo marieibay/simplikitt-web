@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { ImageMetadataRemoverIcon } from '../components/icons/ImageMetadataRemoverIcon';
+import { Eraser as ImageMetadataRemoverIcon } from 'lucide-react';
 import * as piexif from 'piexif-ts';
 
 const ImageMetadataRemoverPage: React.FC = () => {

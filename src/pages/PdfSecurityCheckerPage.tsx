@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PdfSecurityCheckerIcon } from '../components/icons/PdfSecurityCheckerIcon';
+import { FileLock as PdfSecurityCheckerIcon } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';
 
 interface SecurityInfo {
@@ -38,7 +38,6 @@ const PdfSecurityCheckerPage: React.FC = () => {
                 .map(([, desc]) => desc) : ['All permissions granted (no restrictions found)'];
 
             setSecurityInfo({
-                // FIX: Cast meta.info to any to access IsEncrypted property without a TypeScript error.
                 isEncrypted: (meta.info as any).IsEncrypted || false,
                 permissions: grantedPermissions
             });

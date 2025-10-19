@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MergePdfIcon } from '../components/icons/MergePdfIcon.tsx';
+import { Combine as MergePdfIcon } from 'lucide-react';
 import * as PDFLib from 'pdf-lib';
 
 const MergePdfPage: React.FC = () => {
