@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { YamlToJsonConverterIcon } from '../components/icons/YamlToJsonConverterIcon';
-
-declare const jsyaml: any;
+import jsyaml from 'js-yaml';
 
 const YamlToJsonConverterPage: React.FC = () => {
   const [yamlInput, setYamlInput] = useState('name: John Doe\nage: 30\ncity: New York');

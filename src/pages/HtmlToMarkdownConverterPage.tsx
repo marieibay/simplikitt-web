@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HtmlToMarkdownConverterIcon } from '../components/icons/HtmlToMarkdownConverterIcon';
-
-declare const TurndownService: any;
+import TurndownService from 'turndown';
 
 const HtmlToMarkdownConverterPage: React.FC = () => {
   const [htmlInput, setHtmlInput] = useState('<h1>Hello World</h1>\n<p>This is <strong>HTML</strong>.</p>');

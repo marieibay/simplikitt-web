@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { QrCode } from 'lucide-react';
-
-declare global {
-  interface Window {
-    QRCode: any;
-  }
-}
+import QRCode from 'qrcode';
 
 const QrCodeGeneratorPage: React.FC = () => {
   const [text, setText] = useState<string>('https://simplikitt.com');
@@ -13,8 +8,8 @@ const QrCodeGeneratorPage: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (canvasRef.current && window.QRCode) {
-      window.QRCode.toCanvas(canvasRef.current, text || ' ', { width: 256, margin: 2, errorCorrectionLevel: 'H' }, (error: Error) => {
+    if (canvasRef.current) {
+      QRCode.toCanvas(canvasRef.current, text || ' ', { width: 256, margin: 2, errorCorrectionLevel: 'H' }, (error: Error) => {
         if (error) console.error(error);
       });
     }

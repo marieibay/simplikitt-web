@@ -1,8 +1,7 @@
 
 import React, { useState } from 'react';
 import { Md5HashGeneratorIcon } from '../components/icons/Md5HashGeneratorIcon';
-
-declare const CryptoJS: any;
+import CryptoJS from 'crypto-js';
 
 const Md5HashGeneratorPage: React.FC = () => {
   const [mode, setMode] = useState<'text' | 'file'>('text');

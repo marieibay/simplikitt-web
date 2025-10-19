@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ExcelToCsvIcon } from '../components/icons/ExcelToCsvIcon';
-
-declare const XLSX: any;
+import * as XLSX from 'xlsx';
 
 const ExcelToCsvPage: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);

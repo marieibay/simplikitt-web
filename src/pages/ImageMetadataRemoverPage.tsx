@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { ImageMetadataRemoverIcon } from '../components/icons/ImageMetadataRemoverIcon';
-
-declare const piexif: any;
+import * as piexif from 'piexif-ts';
 
 const ImageMetadataRemoverPage: React.FC = () => {
     const [originalImage, setOriginalImage] = useState<string>('');

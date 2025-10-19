@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ImageMetadataEditorIcon } from '../components/icons/ImageMetadataEditorIcon';
-
-declare const piexif: any;
+import * as piexif from 'piexif-ts';
 
 const ImageMetadataEditorPage: React.FC = () => {
     const [imageSrc, setImageSrc] = useState<string>('');

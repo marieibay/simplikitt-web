@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MarkdownToHtmlRendererIcon } from '../components/icons/MarkdownToHtmlRendererIcon';
-
-declare const marked: any;
+import { marked } from 'marked';
 
 const MarkdownToHtmlRendererPage: React.FC = () => {
   const [markdownInput, setMarkdownInput] = useState('# Hello World\n\nThis is **Markdown**.');

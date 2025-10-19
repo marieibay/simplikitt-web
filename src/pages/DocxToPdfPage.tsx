@@ -1,8 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { DocxToPdfIcon } from '../components/icons/DocxToPdfIcon';
-
-declare const mammoth: any;
-declare const html2pdf: any;
+import mammoth from 'mammoth';
+import html2pdf from 'html2pdf.js';
 
 const DocxToPdfPage: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);

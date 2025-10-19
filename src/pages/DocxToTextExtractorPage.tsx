@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DocxToTextExtractorIcon } from '../components/icons/DocxToTextExtractorIcon';
-
-declare const mammoth: any;
+import mammoth from 'mammoth';
 
 const DocxToTextExtractorPage: React.FC = () => {
   const [text, setText] = useState('');

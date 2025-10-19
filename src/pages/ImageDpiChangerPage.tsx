@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { ImageDpiChangerIcon } from '../components/icons/ImageDpiChangerIcon';
-
-declare const piexif: any;
+import * as piexif from 'piexif-ts';
 
 const ImageDpiChangerPage: React.FC = () => {
     const [imageSrc, setImageSrc] = useState<string>('');
